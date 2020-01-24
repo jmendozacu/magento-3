@@ -1,0 +1,510 @@
+<?php 
+$Full_Name = $_POST['Full_Name'];
+$Email_Address = $_POST['Email_Address'];
+$Telephone_Number = $_POST['Telephone_Number'];
+$Your_Message = $_REQUEST['Your_Message'];
+$AntiSpam = $_POST['AntiSpam'];
+$Institution = $_POST['Institution'];
+$A1 = $_POST['A1'];
+$A2 = $_POST['A2'];
+$A3 = $_POST['A3'];
+$A4 = $_POST['A4'];
+$A5 = $_POST['A5'];
+$A6 = $_POST['A6'];
+$A7 = $_POST['A7'];
+$A8 = $_POST['A8'];
+$A9 = $_POST['A9'];
+$A10 = $_POST['A10'];
+$A11 = $_POST['A11'];
+$A12 = $_POST['A12'];
+
+$B1 = $_POST['B1'];
+$B2 = $_POST['B2'];
+$B3 = $_POST['B3'];
+$B4 = $_POST['B4'];
+$B5 = $_POST['B5'];
+$B6 = $_POST['B6'];
+$B7 = $_POST['B7'];
+$B8 = $_POST['B8'];
+$B9 = $_POST['B9'];
+$B10 = $_POST['B10'];
+$B11 = $_POST['B11'];
+$B12 = $_POST['B12'];
+
+$C1 = $_POST['C1'];
+$C2 = $_POST['C2'];
+$C3 = $_POST['C3'];
+$C4 = $_POST['C4'];
+$C5 = $_POST['C5'];
+$C6 = $_POST['C6'];
+$C7 = $_POST['C7'];
+$C8 = $_POST['C8'];
+$C9 = $_POST['C9'];
+$C10 = $_POST['C10'];
+$C11 = $_POST['C11'];
+$C12 = $_POST['C12'];
+
+$D1 = $_POST['D1'];
+$D2 = $_POST['D2'];
+$D3 = $_POST['D3'];
+$D4 = $_POST['D4'];
+$D5 = $_POST['D5'];
+$D6 = $_POST['D6'];
+$D7 = $_POST['D7'];
+$D8 = $_POST['D8'];
+$D9 = $_POST['D9'];
+$D10 = $_POST['D10'];
+$D11 = $_POST['D11'];
+$D12 = $_POST['D12'];
+
+$E1 = $_POST['E1'];
+$E2 = $_POST['E2'];
+$E3 = $_POST['E3'];
+$E4 = $_POST['E4'];
+$E5 = $_POST['E5'];
+$E6 = $_POST['E6'];
+$E7 = $_POST['E7'];
+$E8 = $_POST['E8'];
+$E9 = $_POST['E9'];
+$E10 = $_POST['E10'];
+$E11 = $_POST['E11'];
+$E12 = $_POST['E12'];
+
+$F1 = $_POST['F1'];
+$F2 = $_POST['F2'];
+$F3 = $_POST['F3'];
+$F4 = $_POST['F4'];
+$F5 = $_POST['F5'];
+$F6 = $_POST['F6'];
+$F7 = $_POST['F7'];
+$F8 = $_POST['F8'];
+$F9 = $_POST['F9'];
+$F10 = $_POST['F10'];
+$F11 = $_POST['F11'];
+$F12 = $_POST['F12'];
+
+$G1 = $_POST['G1'];
+$G2 = $_POST['G2'];
+$G3 = $_POST['G3'];
+$G4 = $_POST['G4'];
+$G5 = $_POST['G5'];
+$G6 = $_POST['G6'];
+$G7 = $_POST['G7'];
+$G8 = $_POST['G8'];
+$G9 = $_POST['G9'];
+$G10 = $_POST['G10'];
+$G11 = $_POST['G11'];
+$G12 = $_POST['G12'];
+
+$H1 = $_POST['H1'];
+$H2 = $_POST['H2'];
+$H3 = $_POST['H3'];
+$H4 = $_POST['H4'];
+$H5 = $_POST['H5'];
+$H6 = $_POST['H6'];
+$H7 = $_POST['H7'];
+$H8 = $_POST['H8'];
+$H9 = $_POST['H9'];
+$H10 = $_POST['H10'];
+$H11  = $_POST['H11'];
+$H12 = $_POST['H12'];
+
+if(isset($_POST['Submit']))
+{
+	if ($AntiSpam == '25')
+	{
+		$to = "manoj@sciencellonline.com";
+		$subject = "CUSTOMIZE YOUR KIT";
+		$from = "from: ".$Email_Address;
+		$body = "From: $Full_Name \n E-Mail: $Email_Address \n\n Name of the Institution: $Institution \n\n Experiment details: $Your_Message \n\n\n\n Kit Desgin:\nRow A: $A1, $A2, $A3, $A4, $A5, $A6, $A7, $A8, $A9, $A10, $A11, $A12 \nRow B: $B1, $B2, $B3, $B4, $B5, $B6, $B7, $B8, $B9, $B10, $B11, $B12 \nRow C: $C1, $C2, $C3, $C4, $C5, $C6, $C7, $C8, $C9, $C10, $C11, $C12 \nRow D: $D1, $D2, $D3, $D4, $D5, $D6, $D7, $D8, $D9, $D10, $D11, $D12 \nRow E: $E1, $E2, $E3, $E4, $E5, $E6, $E7, $E8, $E9, $E10, $E11, $E12 \nRow F: $F1, $F2, $F3, $F4, $F5, $F6, $F7, $F8, $F9, $F10, $F11, $F12 \nRow G: $G1, $G2, $G3, $G4, $G5, $G6, $G7, $G8, $G9, $G10, $G11, $G12 \nRow H: $H1, $H2, $H3, $H4, $H5, $H6, $H7, $H8, $H9, $H10, $H11, $H12  " ;
+		$mailsnt=mail($to, $subject, $body, $from);
+		if($mailsnt)
+			echo "<br /><div align=\"left\"><b><span>We appreciate your interest in ScienCell products, One of us will get right back to you!</span></b></div><br />";
+		else
+			echo "Not Sent!";
+	}
+	else
+		echo "The Antispam answer you provided is wrong, please try again";
+}
+else
+{
+?>	
+<form name="customizegenequeryform" method="post" action="http://sciencellonline.com/products-services/gene-analysis/customize-your-kit.html" onsubmit="return validate.check(this)"> 
+
+<table border="1" cellpadding="5" cellspacing="5">
+  <tbody>
+    <tr>
+      <td valign="bottom"  width="9"><p> </p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>1</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>2</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>3</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>4</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>5</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>6</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>7</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>8</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>9</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>10</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>11</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>12</strong></p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="9"><p align="center"><strong>AIR</strong></p></td>
+      <td valign="bottom"  width="9"><p><input width="40"   type="text" name="A1" id="A1" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p><input width="40"   type="text" name="A2" id="Full_Name" maxlength="7" /></p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="A3" id="A3" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="A4" id="A4" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="A5" id="A5" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="A6" id="A6" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="A7" id="A7" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="A8" id="A8" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="A9" id="A9" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="A10" id="A10" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="A11" id="A11" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="A12" id="A12" maxlength="7" />
+      </p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="9"><p align="center"><strong>B</strong></p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="B1" id="B1" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="B2" id="B2" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="B3" id="B3" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="B4" id="B4" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="B5" id="B5" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="B6" id="B6" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="B7" id="B7" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="B8" id="B8" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="B9" id="B9" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="B10" id="B10" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="B11" id="B11" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="B12" id="B12" maxlength="7" />
+      </p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="9"><p align="center"><strong>C</strong></p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="C1" id="C1" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="C2" id="C2" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="C3" id="C3" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="C4" id="C4" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="C5" id="C5" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="C6" id="C6" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="C7" id="C7" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="C8" id="C8" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="C9" id="C9" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="C10" id="C10" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="C11" id="C11" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="C12" id="C12" maxlength="7" />
+      </p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="9"><p align="center"><strong>D</strong></p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="D1" id="D1" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="D2" id="D2" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="D3" id="D3" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="D4" id="D4" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="D5" id="D5" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="D6" id="D6" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="D7" id="D7" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="D8" id="D8" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="D9" id="D9" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="D10" id="D10" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="D11" id="D11" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="D12" id="D12" maxlength="7" />
+      </p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="9"><p align="center"><strong>E</strong></p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="E1" id="E1" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="E2" id="E2" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="E3" id="E3" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="E4" id="E4" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="E5" id="E5" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="E6" id="E6" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="E7" id="E7" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="E8" id="E8" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="E9" id="E9" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="E10" id="E10" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="E11" id="E11" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="E12" id="E12" maxlength="7" />
+      </p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="9"><p align="center"><strong>F</strong></p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="F1" id="F1" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="F2" id="F2" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="F3" id="F3" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="F4" id="F4" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="F5" id="F5" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="F6" id="F6" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="F7" id="F7" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="F8" id="F8" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="F9" id="F9" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="F10" id="F10" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="F11" id="F11" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="F12" id="F12" maxlength="7" />
+      </p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="9"><p align="center"><strong>G</strong></p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="G1" id="G1" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="G2" id="G2" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="G3" id="G3" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="G4" id="G4" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="G5" id="G5" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="G6" id="G6" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="G7" id="G7" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="G8" id="G8" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="G9" id="G9" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="G10" id="G10" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="G11" id="G11" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="G12" id="G12" maxlength="7" />
+      </p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="9"><p align="center"><strong>H</strong></p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="H1" id="H1" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="H2" id="H2" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="H3" id="H3" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="H4" id="H4" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="H5" id="H5" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="H6" id="H6" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="H7" id="H7" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="H8" id="H8" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="H9" id="H9" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="H10" id="H10" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="H11" id="H11" maxlength="7" />
+      </p></td>
+      <td valign="bottom"  width="9"><p>
+        <input width="40"   type="text" name="H12" id="H12" maxlength="7" />
+      </p></td>
+    </tr>
+  </tbody>
+</table>
+<table width="750" border="0" cellpadding="5" cellspacing="5">
+  <tr>
+    <td colspan="4" align="left">	 
+    <div class="freecontactformheader">Your details below:</div>
+	  
+	 <div class="freecontactformmessage">Fields mark ed with <span class="required_star"> * </span> are mandatory.</div>
+     </td>
+    </tr>
+  <tr>
+    <td width="102"> <label for="Full_Name" class="required">Full Name<span class="required_star"> * </span></label></td>
+    <td width="230"><input width="40"   type="text" name="Full_Name" id="Full_Name" maxlength="80" style="width:230px" required></td>
+    <td width="123" rowspan="3" valign="top"><label for="Full_Name" class="required">Short description of the project you are working on, needing this custom kit</label>
+      <span class="required_star"> *</span></td>
+    <td width="230" rowspan="3"><textarea style="width:230px;height:160px" name="Your_Message" id="Your_Message" maxlength="2000" required></textarea></td>
+  </tr>
+  <tr>
+    <td><label for="Email_Address2" class="required">Email Address<span class="required_star"> * </span></label></td>
+    <td><input width="40"   type="email" name="Email_Address" id="Email_Address" maxlength="100" style="width:230px" required></td>
+    </tr>
+  <tr>
+    <td><label for="Telephone_Number2" class="not-required">Telephone Number</label></td>
+    <td><input width="40"   type="text" name="Telephone_Number" id="Telephone_Number" maxlength="100" style="width:230px"></td>
+    </tr>
+    <tr>
+    	<td colspan="4"><label for="Institution" class="required">   	  Name of your Institution? <span class="required_star">* 
+   	  <input width="40"   type="text" name="Institution" id="Institution" maxlength="100" style="width:230px" />
+   	  </span></label></td>
+         
+    </tr>
+    
+  <tr>
+    <td colspan="4" align="center">To help prevent automated spam, please answer this question <br />
+      <br />
+      <div class="antispamquestion"> <span class="required_star"> * </span> Using only numbers, what is 10 plus 15? &nbsp;
+        <input width="40"   type="text" name="AntiSpam" id="AntiSpam" maxlength="100" style="width:30px" required>
+    </div></td>
+    </tr>
+  <tr>
+    <td colspan="4"><center>
+      <input width="40"   type="submit" name="Submit" value=" Submit Form " style="width:200px;height:40px; color:#F00;">
+      </center>
+      </td>
+    </tr>
+
+</table>
+</form>
+<?php
+}
+?>

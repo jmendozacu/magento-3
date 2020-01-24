@@ -1,0 +1,63 @@
+<?php
+//Connect To Database
+$hostname='localhost';
+$username='poweruserdb';
+$password='Manoj1234';
+$dbname='poweruserdb';
+$usertable='your_tablename';
+$yourfield = 'your_field';
+
+mysql_connect($hostname,$username, $password) OR DIE ('Unable to connect to database! Please try again later.');
+mysql_select_db($dbname);
+
+?>
+<?php 
+
+	$result=mysql_query("SELECT * FROM PrimerSet");
+	?>
+
+
+    <div>
+        <strong><span>Sort by Alphabet: A-D  E-H I-L M-P Q-T U-Z</span></strong>
+    </div>
+    <div>
+   
+        
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tbody>
+    <tr>
+   		<th width="10%" style="background-color:#CCC"  scope="col">CAT. NO.</th>
+        <th width="20%" style="background-color:#CCC"  scope="col">GENE SYMBOL</th>
+      <th width="50%" style="background-color:#CCC"  scope="col">DESCRIPTION</th>
+       <th width="10%" style="background-color:#CCC"  scope="col">PRICE</th>
+        <th width="5%" style="background-color:#CCC"  scope="col">Qty</th>
+         <th width="10%" style="background-color:#CCC"  scope="col"></th>
+    </tr>
+    <?php $num_rows = mysql_num_rows($result);
+	//echo "<h1>$num_rows results found for \"$keyword\".</h1>";
+	//echo "<ol>";
+	while ($results = mysql_fetch_array($result))
+	{?>
+    
+    <tr>
+      <td align="left" height="20" ><a href="http://sciencellonline.com/PRIMERSETPRODUCTSHEET/<?php echo $results['Catno']; ?>.pdf" ><?php echo $results['Catno']; ?></a>
+      </td>
+      <td><?php echo  $results['symbol']; ?></td>
+      <td><?php echo $results['name']; ?> </td>
+      <td>$96</td>   
+      <td><input type="text" name="qty" id="qty" maxlength="12" value="1" class="input-text qty" />
+ </span>
+ 	  </td>
+ 	  <td>
+        <span><input type="checkbox" name="vehicle" value="Bike"></span>
+      </td>  
+            
+      </tr>  
+       
+<?php } ?>
+        </table>
+        <input width="40"   type="submit" name="Submit" value=" Request Primers " style="width:200px;height:40px; color:#F00;">
+        
+     </div>
+       
+       

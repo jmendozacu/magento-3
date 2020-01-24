@@ -1,0 +1,857 @@
+﻿
+<?php
+// begin the session
+//Connect To Database
+$hostname='localhost';
+$username='poweruserdb';
+$password='Manoj1234';
+$dbname='poweruserdb';
+$usertable='your_tablename';
+$yourfield = 'your_field';
+
+mysql_connect($hostname,$username, $password) OR DIE ('Unable to connect to database! Please try again later.');
+mysql_select_db($dbname);
+if(!$_GET['Category']) $Category = $_POST['category']; else $Category = $_GET['Category'];
+if(!$_GET['Treelink']) $imagedisplay = $_POST['imagedisplay']; else $imagedisplay = $_GET['Treelink'];
+//$Filter = $_GET['Filter'];
+if($_GET['Matrix'] == 'clear')	unset($_SESSION['Genes']);
+
+
+
+?>
+<a href="https://www.sciencellonline.com/products-services/gene-expression-profiling.html">&lt; Return to Gene Expression Profiling</a>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.sciencellonline.com/js/jquery.maphilight.js"></script>
+    <script type="text/javascript">$(function() {
+        $('.map').maphilight();
+        $('#squidheadlink').mouseover(function(e) {
+            $('#squidhead').mouseover();
+        }).mouseout(function(e) {
+            $('#squidhead').mouseout();
+        }).click(function(e) { e.preventDefault(); });
+    });</script>
+
+
+<?php 
+if($imagedisplay == 'Cell_Biology')
+{
+echo "<img src=https://www.sciencellonline.com/images/CB.png alt=Cell Biology class=map usemap=#Map2 border=0 >
+<map name=Map2>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=https://www.sciencellonline.com/a-z-individual-genes>View All</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Cell_Markers>Cell Markers</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Cell_Biology>Cell Biology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Physiology>Physiology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Pathology>Pathology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Controls&Category=Controls#Genes>Controls</a>
+  <area shape=rect style=border:thick  coords=452,588,550,711 href=?Treelink=CBM>
+  <area shape=rect coords=706,180,817,335 href=?Treelink=CBTT>
+  <area shape=rect coords=298,42,384,83 href=?Treelink=CBCCG>
+  <area shape=rect coords=417,474,509,516 href=?Treelink=CBST>
+  <area shape=rect coords=497,366,577,409 href=?Treelink=CBMA>
+  <area shape=rect coords=437,21,591,99 href=?Treelink=CBCCG>
+  <area shape=rect coords=594,476,712,664 href=?Treelink=CBST>
+  <area shape=rect coords=762,352,887,517 href=?Treelink=CBMA>
+  <area shape=rect coords=643,61,767,165 href=?Treelink=CBGE>
+  <area shape=rect coords=299,598,388,625 href=?Treelink=CBM>
+  <area shape=rect coords=484,253,566,313 href=?Treelink=CBTT>
+  <area shape=rect coords=427,162,542,192 href=?Treelink=CBGE>";
+}
+else if($imagedisplay == 'CBCCG')
+{
+echo "<img src=https://www.sciencellonline.com/images/CBCCG.png alt=Cell Biology class=map usemap=#MapCG border=0>
+<map name=MapCG id=MapCG>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=?Treelink=Cell_Biology>Cell Biology</a> | <a href=?Treelink=CBCCG>Cell Cycling and Growth</a> | <a href=?Treelink=CBGE>Gene Expression</a> | <a href=?Treelink=CBTT>Transport and Trafficking</a> | <a href=?Treelink=CBMA>Motility and Adhesion</a> | <a href=?Treelink=CBST>Signal Transduction</a> | <a href=?Treelink=CBM>Metabolism</a>
+  <area shape=rect coords=40,269,103,315 href=?Treelink=CellBiology />
+  <area shape=rect coords=775,13,929,40 href=?Treelink=CBCCG&amp;Category=Meiosis#Genes />
+  <area shape=rect coords=775,40,929,67 href=?Treelink=CBCCG&amp;Category=Mitosis#Genes />
+  <area shape=rect coords=773,66,933,92 href=?Treelink=CBCCG&amp;Category=DNA_Replication#Genes />
+  <area shape=rect coords=775,92,927,132 href=?Treelink=CBCCG&amp;Category=Spindle_Kinetochore_and_Centrosomal_Elements#Genes />
+  <area shape=rect coords=797,154,903,181 href=?Treelink=CBCCG&amp;Category=G1/S#Genes />
+  <area shape=rect coords=797,183,905,208 href=?Treelink=CBCCG&amp;Category=Intra-S#Genes />
+  <area shape=rect coords=799,208,904,232 href=?Treelink=CBCCG&amp;Category=G2/M#Genes />
+  <area shape=rect coords=798,232,906,260 href=?Treelink=CBCCG&amp;Category=Cyclins_and_CDKs#Genes />
+  <area shape=rect coords=558,248,676,279 href=?Treelink=CBCCG&amp;Category=Damage_Sensing#Genes />
+  <area shape=rect coords=561,277,679,305 href=?Treelink=CBCCG&amp;Category=Cell_Cycle_Arrest#Genes />
+  <area shape=rect coords=560,304,679,330 href=?Treelink=CBCCG&amp;Category=DNA_Repair#Genes />
+  <area shape=rect coords=556,385,681,416 href=?Treelink=CBCCG&amp;Category=Senescence#Genes />
+  <area shape=rect coords=559,416,681,440 href=?Treelink=CBCCG&amp;Category=Death_Induction#Genes />
+  <area shape=rect coords=558,440,679,465 href=?Treelink=CBCCG&amp;Category=Necrosis#Genes />
+  <area shape=rect coords=555,466,681,492 href=?Treelink=CBCCG&amp;Category=Apoptosis#Genes />
+  <area shape=rect coords=560,492,680,517 href=?Treelink=CBCCG&amp;Category=Proteolysis#Genes />
+  <area shape=rect coords=562,118,676,143 href=?Treelink=CBCCG&amp;Category=Division#Genes />
+  <area shape=rect coords=559,188,676,213 href=?Treelink=CBCCG&amp;Category=Checkpoint#Genes />
+  <area shape=rect coords=562,26,676,51 href=?Treelink=CBCCG&amp;Category=Survival#Genes />
+  <area shape=rect coords=562,54,675,91 href=?Treelink=CBCCG&amp;Category=Polarity_and_Size_Regulation#Genes />
+  <area shape=rect coords=561,94,675,115 href=?Treelink=CBCCG&amp;Category=G0/G1_Transition#Genes />
+  <area shape=rect coords=562,145,679,187 href=?Treelink=CBCCG&amp;Category=Cytoskeleton_and_Nuclear_Matrix#Genes />
+</map>";
+}
+else if($imagedisplay == 'CBGE')
+{
+echo "<img src=https://www.sciencellonline.com/images/CBGE.png alt=Cell Biology class=map usemap=#MapGE border=0>
+<map name=MapGE id=MapGE>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=?Treelink=Cell_Biology>Cell Biology</a> | <a href=?Treelink=CBCCG>Cell Cycling and Growth</a> | <a href=?Treelink=CBGE>Gene Expression</a> | <a href=?Treelink=CBTT>Transport and Trafficking</a> | <a href=?Treelink=CBMA>Motility and Adhesion</a> | <a href=?Treelink=CBST>Signal Transduction</a> | <a href=?Treelink=CBM>Metabolism</a>
+  <area shape=rect coords=9,335,73,379 href=?Treelink=CellBiology#Genes />
+  <area shape=rect coords=813,9,945,40 href=?Treelink=CBGE&amp;Category=RNA_Helicases#Genes />
+  <area shape=rect coords=811,39,944,78 href=?Treelink=CBGE&amp;Category=RNA_Polymerases_and_Associated_Factors#Genes />
+  <area shape=rect coords=816,87,940,112 href=?Treelink=CBGE&amp;Category=HLH#Genes />
+  <area shape=rect coords=813,110,940,139 href=?Treelink=CBGE&amp;Category=bZIP#Genes />
+  <area shape=rect coords=815,135,945,165 href=?Treelink=CBGE&amp;Category=Zinc#Genes />
+  <area shape=rect coords=815,162,939,191 href=?Treelink=CBGE&amp;Category=Homeobox#Genes />
+  <area shape=rect coords=817,189,941,215 href=?Treelink=CBGE&amp;Category=ETS#Genes />
+  <area shape=rect coords=814,216,945,241 href=?Treelink=CBGE&amp;Category=E2F#Genes />
+  <area shape=rect coords=815,239,940,267 href=?Treelink=CBGE&amp;Category=HMG#Genes />
+  <area shape=rect coords=816,265,944,293 href=?Treelink=CBGE&amp;Category=Fox#Genes />
+  <area shape=rect coords=814,291,943,319 href=?Treelink=CBGE&amp;Category=Tbox#Genes />
+  <area shape=rect coords=815,316,940,341 href=?Treelink=CBGE&amp;Category=Runt#Genes />
+  <area shape=rect coords=817,337,940,366 href=?Treelink=CBGE&amp;Category=MADS#Genes />
+  <area shape=rect coords=816,365,941,393 href=?Treelink=CBGE&amp;Category=RHR#Genes />
+  <area shape=rect coords=816,391,940,418 href=?Treelink=CBGE&amp;Category=Nuclear_Receptors#Genes />
+  <area shape=rect coords=816,416,940,445 href=?Treelink=CBGE&amp;Category=Activators#Genes />
+  <area shape=rect coords=816,442,941,472 href=?Treelink=CBGE&amp;Category=Repressors#Genes />
+  <area shape=rect coords=813,469,940,497 href=?Treelink=CBGE&amp;Category=Co-activators#Genes />
+  <area shape=rect coords=814,496,942,520 href=?Treelink=CBGE&amp;Category=Co-repressors#Genes />
+  <area shape=rect coords=815,539,941,565 href=?Treelink=CBGE&amp;Category=Components#Genes />
+  <area shape=rect coords=816,564,938,607 href=?Treelink=CBGE&amp;Category=Chromatin_Remodeling#Genes />
+  <area shape=rect coords=817,607,935,647 href=?Treelink=CBGE&amp;Category=Histone_Acetylases_and_Deacetylases#Genes />
+  <area shape=rect coords=814,648,941,694 href=?Treelink=CBGE&amp;Category=Histone_Methylation#Genes />
+  <area shape=rect coords=501,275,629,303 href=?Treelink=CBGE&amp;Category=General_Regulation#Genes />
+  <area shape=rect coords=497,305,628,329 href=?Treelink=CBGE&amp;Category=Splicing#Genes />
+  <area shape=rect coords=514,373,602,397 href=?Treelink=CBGE&amp;Category=Regulation#Genes />
+  <area shape=rect coords=511,397,607,426 href=?Treelink=CBGE&amp;Category=Ribosomes#Genes />
+  <area shape=rect coords=516,424,607,453 href=?Treelink=CBGE&amp;Category=Factors#Genes />
+  <area shape=rect coords=491,493,630,518 href=?Treelink=CBGE&amp;Category=Chaperones#Genes />
+  <area shape=rect coords=496,517,632,549 href=?Treelink=CBGE&amp;Category=Modifying_Enzymes#Genes />
+</map>";
+}
+else if($imagedisplay == 'CBTT')
+{
+echo "<img src=https://www.sciencellonline.com/images/CBTT.png alt=Cell Biology class=map usemap=#MapTT border=0>
+<map name=MapTT id=MapTT>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=?Treelink=Cell_Biology>Cell Biology</a> | <a href=?Treelink=CBCCG>Cell Cycling and Growth</a> | <a href=?Treelink=CBGE>Gene Expression</a> | <a href=?Treelink=CBTT>Transport and Trafficking</a> | <a href=?Treelink=CBMA>Motility and Adhesion</a> | <a href=?Treelink=CBST>Signal Transduction</a> | <a href=?Treelink=CBM>Metabolism</a>
+  <area shape=rect coords=491,105,651,130 href=?Treelink=CBTT&amp;Category=Vesicular_Formation#Genes />
+  <area shape=rect coords=489,78,650,103 href=?Treelink=CBTT&amp;Category=Carriers_and_Chaperones#Genes />
+  <area shape=rect coords=491,52,649,75 href=?Treelink=CBTT&amp;Category=Scaffolds_and_Adaptors#Genes />
+  <area shape=rect coords=490,23,646,50 href=?Treelink=CBTT&amp;Category=Tethers_and_Docks#Genes />
+  <area shape=rect coords=762,3,876,32 href=?Treelink=CBTT&amp;Category=Receptors#Genes />
+  <area shape=rect coords=766,31,877,60 href=?Treelink=CBTT&amp;Category=Sorting#Genes />
+  <area shape=rect coords=763,60,878,85 href=?Treelink=CBTT&amp;Category=RAS_Superfamily#Genes />
+  <area shape=rect coords=764,85,875,110 href=?Treelink=CBTT&amp;Category=Transport#Genes />
+  <area shape=rect coords=765,109,878,137 href=?Treelink=CBTT&amp;Category=Vesicular_Fusion#Genes />
+  <area shape=rect coords=744,172,897,199 href=?Treelink=CBTT&amp;Category=Phagocytosis_Receptors#Genes />
+  <area shape=rect coords=745,199,897,224 href=?Treelink=CBTT&amp;Category=Regulation#Genes />
+  <area shape=rect coords=745,222,897,249 href=?Treelink=CBTT&amp;Category=Superoxide_Production#Genes />
+  <area shape=rect coords=751,290,890,313 href=?Treelink=CBTT&amp;Category=targeting#Genes />
+  <area shape=rect coords=750,314,889,339 href=?Treelink=CBTT&amp;Category=SUMOylation#Genes />
+  <area shape=rect coords=752,338,890,384 href=?Treelink=CBTT&amp;Category=E1_and_E2_ubiquitin_Ligases#Genes />
+  <area shape=rect coords=750,384,891,409 href=?Treelink=CBTT&amp;Category=E3_Ubiquitin_Ligases#Genes />
+  <area shape=rect coords=767,465,876,494 href=?Treelink=CBTT&amp;Category=Ligand-gated#Genes />
+  <area shape=rect coords=768,443,876,468 href=?Treelink=CBTT&amp;Category=Voltage-gated#Genes />
+  <area shape=rect coords=494,470,650,496 href=?Treelink=CBTT&amp;Category=Components#Genes />
+  <area shape=rect coords=493,444,648,468 href=?Treelink=CBTT&amp;Category=Dynamics_and_Remodeling#Genes />
+  <area shape=rect coords=43,248,111,293 href=?Treelink=Cell_Biology#Genes />
+  <area shape=rect coords=525,316,624,345 href=?Treelink=CBTT&amp;Category=Pores#Genes />
+  <area shape=rect coords=525,346,625,370 href=?Treelink=CBTT&amp;Category=Transporters#Genes />
+</map>";
+}
+else if($imagedisplay == 'CBMA')
+{
+echo "<img src=https://www.sciencellonline.com/images/CBMA.png alt=Cell Biology class=map usemap=#MapMA border=0>
+<map name=MapMA id=MapMA>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=?Treelink=Cell_Biology>Cell Biology</a> | <a href=?Treelink=CBCCG>Cell Cycling and Growth</a> | <a href=?Treelink=CBGE>Gene Expression</a> | <a href=?Treelink=CBTT>Transport and Trafficking</a> | <a href=?Treelink=CBMA>Motility and Adhesion</a> | <a href=?Treelink=CBST>Signal Transduction</a> | <a href=?Treelink=CBM>Metabolism</a>
+  <area shape=rect coords=13,321,80,364 href=?Treelink=Cell_Biology />
+  <area shape=rect coords=480,196,687,222 href=?Treelink=CBMA&amp;Category=Other_ECM_Binding#Genes />
+  <area shape=rect coords=477,171,690,193 href=?Treelink=CBMA&amp;Category=Laminin_Binding#Genes />
+  <area shape=rect coords=478,18,689,43 href=?Treelink=CBMA&amp;Category=Receptors_and_Surface_Glycoproteins#Genes />
+  <area shape=rect coords=479,45,688,69 href=?Treelink=CBMA&amp;Category=Scaffolding#Genes />
+  <area shape=rect coords=478,71,691,95 href=?Treelink=CBMA&amp;Category=Focal_Adhesion_Complexes#Genes />
+  <area shape=rect coords=480,97,689,122 href=?Treelink=CBMA&amp;Category=Collagen_Binding#Genes />
+  <area shape=rect coords=478,121,689,143 href=?Treelink=CBMA&amp;Category=Fibrinogen_Binding#Genes />
+  <area shape=rect coords=480,145,691,169 href=?Treelink=CBMA&amp;Category=Fibronectin_Binding#Genes />
+  <area shape=rect coords=809,221,914,247 href=?Treelink=CBMA&amp;Category=Enzymes#Genes />
+  <area shape=rect coords=810,195,914,218 href=?Treelink=CBMA&amp;Category=Proteins#Genes />
+  <area shape=rect coords=790,286,933,309 href=?Treelink=CBMA&amp;Category=Classical_Cadherins#Genes />
+  <area shape=rect coords=789,311,933,351 href=?Treelink=CBMA&amp;Category=Proto-_and_Nonclassical_Cadherins#Genes />
+  <area shape=rect coords=789,354,933,395 href=?Treelink=CBMA&amp;Category=Other_Related_Elements#Genes />
+  <area shape=rect coords=780,544,944,569 href=?Treelink=CBMA&amp;Category=Structural_Components#Genes />
+  <area shape=rect coords=779,520,943,543 href=?Treelink=CBMA&amp;Category=Stability#Genes />
+  <area shape=rect coords=781,496,942,518 href=?Treelink=CBMA&amp;Category=Assembly_and_Disassembly#Genes />
+  <area shape=rect coords=781,469,945,494 href=?Treelink=CBMA&amp;Category=Polarity#Genes />
+  <area shape=rect coords=783,442,944,469 href=?Treelink=CBMA&amp;Category=Dynamics_and_Remodeling#Genes />
+  <area shape=rect coords=807,646,922,676 href=?Treelink=CBMA&amp;Category=Dendritic_Spines#Genes />
+  <area shape=rect coords=808,621,917,645 href=?Treelink=CBMA&amp;Category=Microvilli#Genes />
+  <area shape=rect coords=809,594,917,619 href=?Treelink=CBMA&amp;Category=Cilia#Genes />
+  <area shape=rect coords=517,488,654,515 href=?Treelink=CBMA&amp;Category=Ligands#Genes />
+  <area shape=rect coords=516,514,653,540 href=?Treelink=CBMA&amp;Category=Receptors#Genes />
+  <area shape=rect coords=515,252,640,278 href=?Treelink=CBMA&amp;Category=Matrix_Components#Genes />
+  <area shape=rect coords=536,428,633,453 href=?Treelink=CBMA&amp;Category=Desmosomes#Genes />
+  <area shape=rect coords=537,404,632,428 href=?Treelink=CBMA&amp;Category=Tight#Genes />
+  <area shape=rect coords=539,349,630,378 href=?Treelink=CBMA&amp;Category=Gap#Genes />
+</map>";
+}
+else if($imagedisplay == 'CBST')
+{
+echo "<img src=https://www.sciencellonline.com/images/CBST.png alt=Cell Biology class=map usemap=#MapST border=0>
+<map name=MapST id=MapST>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=?Treelink=Cell_Biology>Cell Biology</a> | <a href=?Treelink=CBCCG>Cell Cycling and Growth</a> | <a href=?Treelink=CBGE>Gene Expression</a> | <a href=?Treelink=CBTT>Transport and Trafficking</a> | <a href=?Treelink=CBMA>Motility and Adhesion</a> | <a href=?Treelink=CBST>Signal Transduction</a> | <a href=?Treelink=CBM>Metabolism</a>
+  <area shape=rect coords=519,33,651,61 href=?Treelink=CBST&amp;Category=Antigens_and_Antibodies#Genes />
+  <area shape=rect coords=521,5,651,33 href=?Treelink=CBST&amp;Category=Cytokines#Genes />
+  <area shape=rect coords=547,86,607,114 href=?Treelink=CBST&amp;Category=Class_I#Genes />
+  <area shape=rect coords=550,114,606,141 href=?Treelink=CBST&amp;Category=Class_II#Genes />
+  <area shape=rect coords=376,56,496,83 href=?Treelink=CBST&amp;Category=Antigens#Genes />
+  <area shape=rect coords=379,84,497,110 href=?Treelink=CBST&amp;Category=Cytokines#Genes />
+  <area shape=rect coords=371,402,505,430 href=?Treelink=CBST&amp;Category=GProtein-coupled#Genes />
+  <area shape=rect coords=369,375,504,403 href=?Treelink=CBST&amp;Category=Enzyme-linked#Genes />
+  <area shape=rect coords=373,350,501,373 href=?Treelink=CBST&amp;Category=Ion-linked#Genes />
+  <area shape=rect coords=371,309,502,350 href=?Treelink=CBST&amp;Category=Pattern_Recognition_Receptors#Genes />
+  <area shape=rect coords=371,280,501,308 href=?Treelink=CBST&amp;Category=Co-receptors#Genes />
+  <area shape=rect coords=362,513,511,557 href=?Treelink=CBST&amp;Category=Cytoplasmic_Patteren_Recognition_Receptors#Genes />
+  <area shape=rect coords=364,556,511,596 href=?Treelink=CBST&amp;Category=Second_Messenger_Systems#Genes />
+<area shape=rect coords=553,241,660,269 href=?Treelink=CBST&amp;Category=Other#Genes />
+  <area shape=rect coords=554,203,658,242 href=?Treelink=CBST&amp;Category=Hormones_and_Neuropeptides#Genes />
+  <area shape=rect coords=666,150,814,179 href=?Treelink=CBST&amp;Category=Other_Growth_Factors#Genes />
+  <area shape=rect coords=666,124,817,152 href=?Treelink=CBST&amp;Category=Neutrophic_Factors#Genes />
+  <area shape=rect coords=668,102,815,126 href=?Treelink=CBST&amp;Category=TGFB_Family#Genes />
+  <area shape=rect coords=668,75,812,102 href=?Treelink=CBST&amp;Category=EGF_and_EGF-like#Genes />
+  <area shape=rect coords=668,49,815,72 href=?Treelink=CBST&amp;Category=FGF_Family#Genes />
+  <area shape=rect coords=665,21,816,48 href=?Treelink=CBST&amp;Category=PDGF_and_VEGF_Families#Genes />
+  <area shape=rect coords=845,56,955,82 href=?Treelink=CBST&amp;Category=Other_Receptors#Genes />
+  <area shape=rect coords=846,29,953,55 href=?Treelink=CBST&amp;Category=Tyrosine_Kinases#Genes />
+  <area shape=rect coords=833,187,959,213 href=?Treelink=CBST&amp;Category=Metabotropic#Genes />
+  <area shape=rect coords=832,163,956,187 href=?Treelink=CBST&amp;Category=Secretin#Genes />
+  <area shape=rect coords=833,136,959,163 href=?Treelink=CBST&amp;Category=Rhodopsin#Genes />
+  <area shape=rect coords=833,111,959,137 href=?Treelink=CBST&amp;Category=Frizzled/Smothered#Genes />
+  <area shape=rect coords=569,377,650,402 href=?Treelink=CBST&amp;Category=Scaffolds#Genes />
+  <area shape=rect coords=568,400,649,429 href=?Treelink=CBST&amp;Category=Adaptors#Genes />
+  <area shape=rect coords=700,273,795,298 href=?Treelink=CBST&amp;Category=GEFs#Genes />
+  <area shape=rect coords=700,300,794,330 href=?Treelink=CBST&amp;Category=GAPs#Genes />
+  <area shape=rect coords=699,330,792,353 href=?Treelink=CBST&amp;Category=GTPases#Genes />
+  <area shape=rect coords=699,355,796,377 href=?Treelink=CBST&amp;Category=G_Proteins#Genes />
+  <area shape=rect coords=697,378,797,417 href=?Treelink=CBST&amp;Category=Other_Related_Factors#Genes />
+  <area shape=rect coords=824,477,961,505 href=?Treelink=CBST&amp;Category=Ptdins#Genes />
+  <area shape=rect coords=827,454,962,478 href=?Treelink=CBST&amp;Category=Glycosyltransferases#Genes />
+  <area shape=rect coords=823,428,962,454 href=?Treelink=CBST&amp;Category=Other_Kinases#Genes />
+  <area shape=rect coords=827,397,963,428 href=?Treelink=CBST&amp;Category=TKL_Kinases#Genes />
+  <area shape=rect coords=825,376,960,400 href=?Treelink=CBST&amp;Category=AGC_Kinases#Genes />
+  <area shape=rect coords=825,350,966,377 href=?Treelink=CBST&amp;Category=CK1_and_CAM_Kinases#Genes />
+  <area shape=rect coords=825,325,959,353 href=?Treelink=CBST&amp;Category=CMGC_Kinases#Genes />
+  <area shape=rect coords=826,299,961,325 href=?Treelink=CBST&amp;Category=Phosphatases#Genes />
+  <area shape=rect coords=827,274,960,301 href=?Treelink=CBST&amp;Category=Protease_Inhibitors#Genes />
+  <area shape=rect coords=823,248,966,273 href=?Treelink=CBST&amp;Category=Proteases#Genes />
+  <area shape=rect coords=816,599,956,631 href=?Treelink=CBST&amp;Category=Downstream_Effectors#Genes />
+  <area shape=rect coords=814,569,956,600 href=?Treelink=CBST&amp;Category=Regulatory_Elements#Genes />
+  <area shape=rect coords=816,548,955,573 href=?Treelink=CBST&amp;Category=Ion_Binding#Genes />
+  <area shape=rect coords=816,518,956,550 href=?Treelink=CBST&amp;Category=Metal_Binding#Genes />
+  <area shape=rect coords=642,678,789,705 href=?Treelink=CBST&amp;Category=Ligand-gated#Genes />
+  <area shape=rect coords=643,655,788,678 href=?Treelink=CBST&amp;Category=Voltage-gated#Genes />
+  <area shape=rect coords=644,624,787,654 href=?Treelink=CBST&amp;Category=Voltage-independent#Genes />
+  <area shape=rect coords=642,597,786,626 href=?Treelink=CBST&amp;Category=Regulators#Genes />
+  <area shape=rect coords=0,296,63,338 href=?Treelink=Cell_Biology#Genes />
+</map>";
+}
+else if($imagedisplay == 'CBM')
+{
+echo "<img src=https://www.sciencellonline.com/images/CBM.png alt=Cell Biology class=map usemap=#MapCBM border=0>
+<map name=MapCBM id=MapCBM>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=?Treelink=Cell_Biology>Cell Biology</a> | <a href=?Treelink=CBCCG>Cell Cycling and Growth</a> | <a href=?Treelink=CBGE>Gene Expression</a> | <a href=?Treelink=CBTT>Transport and Trafficking</a> | <a href=?Treelink=CBMA>Motility and Adhesion</a> | <a href=?Treelink=CBST>Signal Transduction</a> | <a href=?Treelink=CBM>Metabolism</a>
+  <area shape=rect coords=640,9,788,37 href=?Treelink=CBM&amp;Category=Lipids#Genes />
+  <area shape=rect coords=643,35,789,62 href=?Treelink=CBM&amp;Category=Carbohydrates#Genes />
+  <area shape=rect coords=641,62,787,88 href=?Treelink=CBM&amp;Category=Proteins#Genes />
+  <area shape=rect coords=646,86,788,117 href=?Treelink=CBM&amp;Category=Nucleic_Acid_Turnover#Genes />
+  <area shape=rect coords=645,244,791,271 href=?Treelink=CBM&amp;Category=Nucleic_Acids#Genes />
+  <area shape=rect coords=641,220,793,247 href=?Treelink=CBM&amp;Category=Proteins/Amino_Acids#Genes />
+  <area shape=rect coords=646,193,787,220 href=?Treelink=CBM&amp;Category=Oligosaccharides#Genes />
+  <area shape=rect coords=645,168,789,195 href=?Treelink=CBM&amp;Category=Lipids_and_Fatty_Acids#Genes />
+  <area shape=rect coords=644,144,789,170 href=?Treelink=CBM&amp;Category=Organelles#Genes />
+  <area shape=rect coords=451,116,550,156 href=?Treelink=CBM&amp;Category=Redox_and_Free_Radicals#Genes />
+  <area shape=rect coords=453,66,546,89 href=?Treelink=CBM&amp;Category=Autophagy#Genes />
+  <area shape=rect coords=151,106,220,156 href=?Treelink=Cell_Biology#Genes />
+</map>";
+}
+
+else if($imagedisplay == 'Cell_Markers')
+{
+echo "<img src=https://www.sciencellonline.com/images/CellMarkers.png alt=Cell Markers class=map usemap=#Map4 border=0>
+<map name=Map4 id=Map4>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=https://www.sciencellonline.com/a-z-individual-genes>View All</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Cell_Markers>Cell Markers</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Cell_Biology>Cell Biology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Physiology>Physiology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Pathology>Pathology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Controls&Category=Controls#Genes>Controls</a>
+  <area shape=rect coords=750,13,849,41 href=?Treelink=Cell_Markers&Category=Neutrophils#Genes />
+    <area shape=rect coords=751,42,849,66 href=?Treelink=Cell_Markers&amp;Category=Macrophages#Genes />
+  <area shape=rect coords=748,66,851,92 href=?Treelink=Cell_Markers&amp;Category=Platelets#Genes />
+  <area shape=rect coords=737,123,861,149 href=?Treelink=Cell_Markers&amp;Category=T_cells#Genes />
+  <area shape=rect coords=737,147,862,176 href=?Treelink=Cell_Markers&amp;Category=Natural_Killer_Cells#Genes />
+  <area shape=rect coords=738,174,862,202 href=?Treelink=Cell_Markers&amp;Category=B_cells#Genes />
+  <area shape=rect coords=751,256,848,281 href=?Treelink=Cell_Markers&amp;Category=Microglia#Genes />
+  <area shape=rect coords=751,228,845,257 href=?Treelink=Cell_Markers&amp;Category=Astrocytes#Genes />
+  <area shape=rect coords=750,331,846,363 href=?Treelink=Cell_Markers&amp;Category=Pericytes#Genes  />
+  <area shape=rect coords=751,306,845,336 href=?Treelink=Cell_Markers&amp;Category=Fibroblasts#Genes  />
+  <area shape=rect coords=488,358,675,388 href=?Treelink=Cell_Markers&amp;Category=Vascular_Endothelial_Cells#Genes  />
+  <area shape=rect coords=488,389,672,415 href=?Treelink=Cell_Markers&amp;Category=Lymphatic_Endothelial_Cells#Genes  />
+  <area shape=rect coords=284,508,387,535 href=?Treelink=Cell_Markers&amp;Category=Epithelial_Cells#Genes  />
+  <area shape=rect coords=515,33,644,60 href=?Treelink=Cell_Markers&amp;Category=Stem_Cells#Genes  />
+  <area shape=rect coords=515,60,643,86 href=?Treelink=Cell_Markers&amp;Category=Dendritic_Cells#Genes  />
+  <area shape=rect coords=496,194,665,222 href=?Treelink=Cell_Markers&amp;Category=Mesenchymal_Stem_Cells#Genes  />
+  <area shape=rect coords=494,247,665,275 href=?Treelink=Cell_Markers&amp;Category=Neurons#Genes  />
+</map>";
+}
+
+else if($imagedisplay == 'Physiology')
+{
+echo "<img src=https://www.sciencellonline.com/images/physiology.png alt=Cell Biology class=map usemap=#Map3 border=0>
+<map name=Map3 id=Map3>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=https://www.sciencellonline.com/a-z-individual-genes>View All</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Cell_Markers>Cell Markers</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Cell_Biology>Cell Biology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Physiology>Physiology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Pathology>Pathology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Controls&Category=Controls>Controls</a>
+  <area shape=rect coords=305,78,433,124 href=?Treelink=PPD />
+  <area shape=rect coords=321,218,421,249 href=?Treelink=PA />
+  <area shape=rect coords=308,336,435,368 href=?Treelink=PN />
+  <area shape=rect coords=331,438,412,485 href=?Treelink=PIR />
+  <area shape=rect coords=307,579,438,626 href=?Treelink=PHM />
+  <area shape=rect coords=712,15,843,281 href=?Treelink=PPD />
+  <area shape=rect coords=516,233,626,314 href=?Treelink=PA />
+  <area shape=rect coords=704,307,850,432 href=?Treelink=PN />
+  <area shape=rect coords=675,450,879,608 href=?Treelink=PIR />
+  <area shape=rect coords=511,588,637,698 href=?Treelink=PHM />
+</map>";
+}
+else if($imagedisplay == 'PPD')
+{
+echo "<img src=https://www.sciencellonline.com/images/PPD.png alt=Cell Biology class=map usemap=#MapPPD border=0>
+<map name=MapPPD id=MapPPD>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=?Treelink=PPD>Patterning and Differentiation</a> | <a href=?Treelink=PA>Angiogenesis</a> | <a href=?Treelink=PN>Neurotransmission</a> | <a href=?Treelink=PIR>Immune Response</a> | <a href=?Treelink=PHM>Homeostasis and Metabolism</a> 
+  <area shape=rect coords=718,10,879,52 href=?Treelink=PPD&amp;Category=Maintenance_of_Pluripotency#Genes  />
+  <area shape=rect coords=719,50,879,78 href=?Treelink=PPD&amp;Category=Gastrulation#Genes  />
+  <area shape=rect coords=719,78,880,105 href=?Treelink=PPD&amp;Category=Segmentation#Genes  />
+  <area shape=rect coords=722,105,880,146 href=?Treelink=PPD&amp;Category=Epithelial_to_Mesenchymal_Transition#Genes  />
+  <area shape=rect coords=724,176,871,204 href=?Treelink=PPD&amp;Category=Neurogenesis#Genes  />
+  <area shape=rect coords=726,204,872,247 href=?Treelink=PPD&amp;Category=Axon_Guidance_and_Neuronal_Migration#Genes  />
+  <area shape=rect coords=730,246,870,272 href=?Treelink=PPD&amp;Category=Brain_Development#Genes  />
+  <area shape=rect coords=730,270,869,299 href=?Treelink=PPD&amp;Category=General_Development#Genes  />
+  <area shape=rect coords=429,210,558,251 href=?Treelink=PPD&amp;Category=Axis_and_Symmetry_Regulation#Genes  />
+  <area shape=rect coords=427,356,558,381 href=?Treelink=PPD&amp;Category=Adipogenesis#Genes  />
+  <area shape=rect coords=424,381,559,406 href=?Treelink=PPD&amp;Category=Skeleton_Formation#Genes  />
+  <area shape=rect coords=43,317,131,344 href=?Treelink=Physiology#Genes  />
+<area shape=rect coords=430,430,559,461 href=?Treelink=PPD&amp;Category=Sexual_Dimorphisation#Genes  />
+<area shape=rect coords=727,325,870,367 href=?Treelink=PPD&amp;Category=Cardiovascular_Development#Genes  />
+  <area shape=rect coords=727,366,870,410 href=?Treelink=PPD&amp;Category=Trabeculation_Valve_and_Ventricle_Formation#Genes  />
+  <area shape=rect coords=725,442,873,469 href=?Treelink=PPD&amp;Category=Myeloid_Lineage#Genes  />
+  <area shape=rect coords=726,469,872,493 href=?Treelink=PPD&amp;Category=Lymphoid_Lineage#Genes  />
+  <area shape=rect coords=727,493,871,521 href=?Treelink=PPD&amp;Category=General_Regulation#Genes  />
+  <area shape=rect coords=763,554,833,579 href=?Treelink=PPD&amp;Category=Skeletal#Genes  />
+  <area shape=rect coords=765,576,833,607 href=?Treelink=PPD&amp;Category=Cardiac#Genes  />
+  <area shape=rect coords=764,607,835,634 href=?Treelink=PPD&amp;Category=Smooth#Genes  />
+</map>";
+}else if($imagedisplay == 'PA')
+{
+echo "<img src=https://www.sciencellonline.com/images/PA.png alt=Cell Biology class=map usemap=#MapPA border=0>
+<map name=MapPA id=MapPA>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=?Treelink=PPD>Patterning and Differentiation</a> | <a href=?Treelink=PA>Angiogenesis</a> | <a href=?Treelink=PN>Neurotransmission</a> | <a href=?Treelink=PIR>Immune Response</a> | <a href=?Treelink=PHM>Homeostasis and Metabolism</a> 
+  <area shape=rect coords=611,10,762,38 href=?Treelink=PA&amp;Category=Signaling_Ligands#Genes  />
+  <area shape=rect coords=613,39,770,66 href=?Treelink=PA&amp;Category=Signaling_Receptors#Genes  />
+  <area shape=rect coords=611,63,766,90 href=?Treelink=PA&amp;Category=Signal_Transduction#Genes  />
+  <area shape=rect coords=611,89,770,116 href=?Treelink=PA&amp;Category=Hypoxia#Genes  />
+  <area shape=rect coords=622,230,753,259 href=?Treelink=PA&amp;Category=Vessel_Morphology#Genes  />
+  <area shape=rect coords=622,206,753,231 href=?Treelink=PA&amp;Category=EC_Migration#Genes  />
+  <area shape=rect coords=621,180,755,206 href=?Treelink=PA&amp;Category=EC_proliferation#Genes  />
+  <area shape=rect coords=621,156,755,181 href=?Treelink=PA&amp;Category=BM_Degradation#Genes  />
+  <area shape=rect coords=641,354,743,397 href=?Treelink=PA&amp;Category=Mural_Cell_Recruitment#Genes  />
+  <area shape=rect coords=642,328,742,354 href=?Treelink=PA&amp;Category=Permeability#Genes  />
+  <area shape=rect coords=641,301,741,326 href=?Treelink=PA&amp;Category=Vessel_Tone#Genes  />
+  <area shape=rect coords=106,183,193,211 href=?Treelink=Physiology#Genes  />
+</map>";
+}else if($imagedisplay == 'PN')
+{
+echo "<img src=https://www.sciencellonline.com/images/PN.png alt=Cell Biology class=map usemap=#MapPN border=0>
+<map name=MapPN id=MapPN>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=?Treelink=PPD>Patterning and Differentiation</a> | <a href=?Treelink=PA>Angiogenesis</a> | <a href=?Treelink=PN>Neurotransmission</a> | <a href=?Treelink=PIR>Immune Response</a> | <a href=?Treelink=PHM>Homeostasis and Metabolism</a> 
+  <area shape=rect coords=727,8,860,34 href=?Treelink=PN&amp;Category=Synthesis_and_Storage#Genes  />
+  <area shape=rect coords=728,33,855,62 href=?Treelink=PN&amp;Category=Potentiation#Genes  />
+  <area shape=rect coords=724,61,856,87 href=?Treelink=PN&amp;Category=Release#Genes  />
+  <area shape=rect coords=727,86,857,115 href=?Treelink=PN&amp;Category=Synaptic_Assembly#Genes  />
+  <area shape=rect coords=726,137,856,164 href=?Treelink=PN&amp;Category=Regulation#Genes  />
+  <area shape=rect coords=727,164,857,191 href=?Treelink=PN&amp;Category=Vesicle_Endocytosis#Genes  />
+  <area shape=rect coords=726,191,857,218 href=?Treelink=PN&amp;Category=Morphology#Genes  />
+  <area shape=rect coords=734,241,843,268 href=?Treelink=PN&amp;Category=GABA#Genes  />
+  <area shape=rect coords=732,268,843,295 href=?Treelink=PN&amp;Category=Glutamate#Genes  />
+  <area shape=rect coords=733,296,843,320 href=?Treelink=PN&amp;Category=Serotonin#Genes  />
+  <area shape=rect coords=734,318,842,345 href=?Treelink=PN&amp;Category=Catecholamine#Genes  />
+  <area shape=rect coords=732,345,845,373 href=?Treelink=PN&amp;Category=Acetylcholine#Genes  />
+  <area shape=rect coords=469,243,606,269 href=?Treelink=PN&amp;Category=Deactivation#Genes  />
+   <area shape=rect coords=107,194,194,222 href=?Treelink=Physiology#Genes  />
+</map>";
+}else if($imagedisplay == 'PIR')
+{
+echo "<img src=https://www.sciencellonline.com/images/PIR.png alt=Cell Biology class=map usemap=#MapPIR border=0>
+<map name=MapPIR id=MapPIR>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=?Treelink=PPD>Patterning and Differentiation</a> | <a href=?Treelink=PA>Angiogenesis</a> | <a href=?Treelink=PN>Neurotransmission</a> | <a href=?Treelink=PIR>Immune Response</a> | <a href=?Treelink=PHM>Homeostasis and Metabolism</a> 
+  <area shape=rect coords=683,12,869,38 href=?Treelink=PIR&amp;Category=Antigens#Genes  />
+  <area shape=rect coords=683,38,867,63 href=?Treelink=PIR&amp;Category=Cytokines#Genes  />
+  <area shape=rect coords=683,62,870,88 href=?Treelink=PIR&amp;Category=Antigen_Presentation#Genes  />
+  <area shape=rect coords=683,88,869,115 href=?Treelink=PIR&amp;Category=Receptors_and_Co-receptors#Genes  />
+  <area shape=rect coords=682,114,869,139 href=?Treelink=PIR&amp;Category=PRRs#Genes  />
+  <area shape=rect coords=683,139,872,166 href=?Treelink=PIR&amp;Category=Transduction#Genes  />
+  <area shape=rect coords=408,37,604,61 href=?Treelink=PIR&amp;Category=T-_and_B-Cell_Activation#Genes  />
+  <area shape=rect coords=407,59,603,88 href=?Treelink=PIR&amp;Category=Immune_Cell_Localization#Genes  />
+  <area shape=rect coords=407,88,607,114 href=?Treelink=PIR&amp;Category=Trans-endothelial_Migration#Genes  />
+  <area shape=rect coords=406,109,605,140 href=?Treelink=PIR&amp;Category=Wound_Healing_and_Coagulation#Genes  />
+  <area shape=rect coords=405,139,608,168 href=?Treelink=PIR&amp;Category=Inflammation#Genes  />
+  <area shape=rect coords=76,73,162,98 href=?Treelink=Physiology#Genes  />
+</map>";
+}else if($imagedisplay == 'PHM')
+{
+echo "<img src=https://www.sciencellonline.com/images/PHM.png alt=Cell Biology class=map usemap=#MapPHM border=0>
+<map name=MapPHM id=MapPHM>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=?Treelink=PPD>Patterning and Differentiation</a> | <a href=?Treelink=PA>Angiogenesis</a> | <a href=?Treelink=PN>Neurotransmission</a> | <a href=?Treelink=PIR>Immune Response</a> | <a href=?Treelink=PHM>Homeostasis and Metabolism</a> 
+  <area shape=rect coords=729,10,865,36 href=?Treelink=PHM&amp;Category=Insulin_and_Sugars#Genes  />
+  <area shape=rect coords=727,33,864,60 href=?Treelink=PHM&amp;Category=Fats#Genes  />
+  <area shape=rect coords=728,61,864,88 href=?Treelink=PHM&amp;Category=pH_Ions_and_Metals#Genes  />
+  <area shape=rect coords=728,86,864,113 href=?Treelink=PHM&amp;Category=Pressure_and_Volume#Genes  />
+  <area shape=rect coords=729,114,863,143 href=?Treelink=PHM&amp;Category=Hemostasis#Genes  />
+  <area shape=rect coords=723,160,863,186 href=?Treelink=PHM&amp;Category=Oxidative_Stress#Genes  />
+  <area shape=rect coords=724,187,866,211 href=?Treelink=PHM&amp;Category=Proteins_and_Nutrients#Genes  />
+  <area shape=rect coords=725,211,866,239 href=?Treelink=PHM&amp;Category=Drugs_and_Toxins#Genes  />
+  <area shape=rect coords=738,259,860,288 href=?Treelink=PHM&amp;Category=Respiration#Genes  />
+  <area shape=rect coords=733,288,858,314 href=?Treelink=PHM&amp;Category=Bone_Homeostasis#Genes  />
+  <area shape=rect coords=735,311,855,354 href=?Treelink=PHM&amp;Category=Tissue_Repair_and_Maintenance#Genes  />
+  <area shape=rect coords=735,354,856,394 href=?Treelink=PHM&amp;Category=Muscle_Tone_and_Maintenance#Genes  />
+  <area shape=rect coords=732,394,858,420 href=?Treelink=PHM&amp;Category=Thermoregulation#Genes  />
+  <area shape=rect coords=447,237,567,265 href=?Treelink=PHM&amp;Category=Circadian_Rhythm#Genes  />
+  <area shape=rect coords=66,197,153,227 href=?Treelink=Physiology#Genes  />
+</map>";
+}
+else if($imagedisplay == 'Pathology')
+{
+echo "<img src=https://www.sciencellonline.com/images/pathology.png alt=Cell Biology class=map usemap=#MapPHY border=0>
+<map name=MapPHY id=MapPHY>
+<a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=https://www.sciencellonline.com/a-z-individual-genes>View All</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Cell_Markers>Cell Markers</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Cell_Biology>Cell Biology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Physiology>Physiology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Pathology>Pathology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Controls&Category=Controls>Controls</a>
+  <area shape=rect coords=545,98,684,124 href=?Treelink=Pathology&amp;Category=Invasion_and_Metastasis#Genes  />
+  <area shape=rect coords=546,72,689,98 href=?Treelink=Pathology&amp;Category=Tumor_Angiogenesis#Genes  />
+  <area shape=rect coords=545,44,684,73 href=?Treelink=Pathology&amp;Category=Oncogenes#Genes  />
+  <area shape=rect coords=547,5,684,43 href=?Treelink=Pathology&amp;Category=Tumor_Suppressor_Genes#Genes  />
+  <area shape=rect coords=730,56,829,81 href=?Treelink=Pathology&amp;Category=Glioma#Genes  />
+  <area shape=rect coords=729,79,829,107 href=?Treelink=Pathology&amp;Category=Meningioma#Genes  />
+  <area shape=rect coords=728,108,827,133 href=?Treelink=Pathology&amp;Category=Astrocytoma#Genes  />
+  <area shape=rect coords=547,152,686,179 href=?Treelink=Pathology&amp;Category=Prostate_Cancer#Genes  />
+  <area shape=rect coords=545,180,688,204 href=?Treelink=Pathology&amp;Category=Breast_Cancer#Genes  />
+  <area shape=rect coords=348,206,504,233 href=?Treelink=Pathology&amp;Category=Myocardial_Infarction#Genes  />
+  <area shape=rect coords=349,181,505,208 href=?Treelink=Pathology&amp;Category=Myopathy#Genes  />
+  <area shape=rect coords=771,230,927,260 href=?Treelink=Pathology&amp;Category=Pulmonary_Hypertension#Genes  />
+  <area shape=rect coords=524,238,686,262 href=?Treelink=Pathology&amp;Category=Ischemia#Genes  />
+  <area shape=rect coords=522,262,687,286 href=?Treelink=Pathology&amp;Category=Peripheral_Vasculature#Genes  />
+  <area shape=rect coords=771,309,927,335 href=?Treelink=Pathology&amp;Category=Coronary_Artery#Genes  />
+  <area shape=rect coords=773,282,927,308 href=?Treelink=Pathology&amp;Category=Atherosclerosis#Genes  />
+  <area shape=rect coords=773,260,925,282 href=?Treelink=Pathology&amp;Category=Arteriosclerosis#Genes  />
+  <area shape=rect coords=524,311,690,337 href=?Treelink=Pathology&amp;Category=Cerebrovasculature#Genes  />
+  <area shape=rect coords=651,358,765,386 href=?Treelink=Pathology&amp;Category=Type_I#Genes  />
+  <area shape=rect coords=647,386,762,411 href=?Treelink=Pathology&amp;Category=Type_II#Genes  />
+  <area shape=rect coords=824,365,937,390 href=?Treelink=Pathology&amp;Category=Microvascular#Genes  />
+  <area shape=rect coords=823,391,936,418 href=?Treelink=Pathology&amp;Category=Retinopathy#Genes  />
+  <area shape=rect coords=824,416,942,446 href=?Treelink=Pathology&amp;Category=Neuropathy#Genes  />
+  <area shape=rect coords=821,472,943,495 href=?Treelink=Pathology&amp;Category=Psoriasis#Genes  />
+  <area shape=rect coords=822,495,945,522 href=?Treelink=Pathology&amp;Category=Atopic_Dermatitis#Genes  />
+  <area shape=rect coords=660,487,769,513 href=?Treelink=Pathology&amp;Category=Asthma#Genes  />
+  <area shape=rect coords=821,533,944,563 href=?Treelink=Pathology&amp;Category=Psoriatic#Genes  />
+  <area shape=rect coords=820,564,945,593 href=?Treelink=Pathology&amp;Category=Rheumatoid#Genes  />
+  <area shape=rect coords=466,436,573,463 href=?Treelink=Pathology&amp;Category=Lupus#Genes  />
+  <area shape=rect coords=465,503,572,531 href=?Treelink=Pathology&amp;Category=Allergies#Genes  />
+  <area shape=rect coords=550,646,670,673 href=?Treelink=Pathology&amp;Category=Huntingtons#Genes  />
+  <area shape=rect coords=550,605,669,645 href=?Treelink=Pathology&amp;Category=Amyotrophic_Lateral_Sclerosis#Genes  />
+  <area shape=rect coords=549,580,668,606 href=?Treelink=Pathology&amp;Category=Parkinsons#Genes  />
+  <area shape=rect coords=550,554,670,580 href=?Treelink=Pathology&amp;Category=Alzheimers#Genes  />
+  <area shape=rect coords=345,682,474,709 href=?Treelink=Pathology&amp;Category=Autism_Spectrum#Genes  />
+  <area shape=rect coords=346,655,472,682 href=?Treelink=Pathology&amp;Category=Schizophrenia#Genes  />
+  <area shape=rect coords=347,629,472,657 href=?Treelink=Pathology&amp;Category=Bipolar_Disorder#Genes  />
+</map>";
+}else if($imagedisplay == 'Controls')
+{
+echo	"<img src=https://www.sciencellonline.com/images/controls.png width=130 height=162 class=map alt=controls><br /><a href=https://www.sciencellonline.com/genes>Main Menu</a> | <a href=https://www.sciencellonline.com/a-z-individual-genes>View All</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Cell_Markers>Cell Markers</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Cell_Biology>Cell Biology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Physiology>Physiology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Pathology>Pathology</a> | <a href=https://www.sciencellonline.com/genes?Treelink=Controls&Category=Controls>Controls</a><br />
+ScienCell recommends using at least 4 controls: 
+1 internal control to normalize your data (e.g. β-actin, GAPDH, LDHA, NONO, and PPIH)
+1 DNA quality control to detect genomic DNA contamination in your cDNA samples (e.g. GDC, a primer set that targets a non-transcribed region of the genome
+1 positive control (ScienCell offers PPC, which is pre-dispensed synthetic DNA sequence not present in the human genome with a primer pair that can amplify it)
+1 negative control (a well with qPCR primers in which you add all reagents except the template DNA
+";
+
+}
+else
+{
+
+?>
+<center>
+  <p><img src="https://www.sciencellonline.com/media/wysiwyg/primer-small.png" alt="Individual Image banner" width="958" height="141"></p>
+  <p><strong>View genes organized by</strong></p>
+  <p>&nbsp;&nbsp;&nbsp;
+    <a href="https://www.sciencellonline.com/genes?Treelink=Cell_Markers"><img src="https://www.sciencellonline.com/images/CMicon.png" width="130" height="162" alt="Cell Markers"></a> &nbsp;&nbsp;&nbsp;
+    <a href="https://www.sciencellonline.com/genes?Treelink=Cell_Biology"><img src="https://www.sciencellonline.com/images/CBicon.png" width="130" height="162" alt="Cell Biology"></a> &nbsp;&nbsp;&nbsp;
+    <a href="https://www.sciencellonline.com/genes?Treelink=Physiology"><img src="https://www.sciencellonline.com/images/Picon.png" width="130" height="162" alt="Physiology"></a> &nbsp;&nbsp;&nbsp;
+    <a href="https://www.sciencellonline.com/genes?Treelink=Pathology"><img src="https://www.sciencellonline.com/images/PAicon.png" width="130" height="162" alt="Pathology"></a> &nbsp;&nbsp;&nbsp;
+    <a href="https://www.sciencellonline.com/genes?Treelink=Controls&amp;Category=Controls"><img src="https://www.sciencellonline.com/images/controls.png" width="130" height="162" alt="controls"></a>&nbsp;&nbsp;&nbsp;<a href="https://www.sciencellonline.com/a-z-individual-genes"><img src="https://www.sciencellonline.com/images/atoz.png" width="130" height="162" alt="A to Z"></a></p>
+</center>
+  <p>The default product layout is a 96-well plate but you can  elect&nbsp;to receive your primers in 8-tube PCR strips or individual tubes on  the reviewing page.&nbsp; Default primer quantities are 1 reaction/well for  96-well plates and 100 reactions/tube for 8-tube strips and individual  tubes.&nbsp; You can request to change the quantity in the Additional Comments  or Requests section of the reviewing page and include any other requests or  requirements before submitting for a quote.&nbsp; </p>
+  <p>To include replicates, just add the gene to your array  multiple times.&nbsp; Once you&rsquo;ve finished building your qPCR array, edit the  plate layout using simple copy (ctrl+c) or cut (ctrl+v) and paste (ctrl+v)  commands on the Review and Order page to have your genes where you want  them.&nbsp;<br>
+    <br><center>
+  Interested in a custom order? 
+qPCR Ready Plates with up to 96 genes: <strong>$240/plate</strong><br />
+Other custom orders: <a href="https://www.sciencellonline.com/products-services/gene-expression-profiling/customize-your-primers.html">request  a quote &gt;&gt;</a></center></p>
+<p align="center" style="color:#F00">Don't Forget to include Controls!</p>
+<?php
+}
+if($imagedisplay)
+{
+	$Category1 = str_replace('_', " ",$Category);
+	echo "<center><B id=Genes >"; if($Category) echo "<font size=+2 color=#FF0000>",$Category1,"</font><br />select individual genes or  <input type=button id=toggle value='  select all  ' onClick=do_this() />"; else echo "Please select a category filter to view corresponding Genes </Center>";
+	echo "<br /><br /></B>";
+}
+?>
+<form name="IndividualGene" method="post" enctype="multipart/form-data" action="https://www.sciencellonline.com/genes#Array" onSubmit="return validate.check(this)">
+
+
+<script type="text/javascript">
+
+    function do_this(){
+
+        var checkboxes = document.getElementsByName('check_list[]');
+        var button = document.getElementById('toggle');
+
+        if(button.value == '  select all  '){
+            for (var i in checkboxes){
+                checkboxes[i].checked = 'FALSE';
+            }
+            button.value = '  deselect  '
+        }else{
+            for (var i in checkboxes){
+                checkboxes[i].checked = '';
+            }
+            button.value = '  select all  ';
+        }
+    }
+</script>
+
+    
+<table width="100%" border="2" style="background-color:#CCC; padding:5px">
+  <tbody>
+  
+      <?php 
+	$result=mysql_query("SELECT * FROM PrimerSet WHERE Category = '$Category'");
+	$Generesult=mysql_query("SELECT * FROM Genes WHERE Tier5 = '$Category'");
+	$num_rows = mysql_num_rows($result);
+	$num_Genes = mysql_num_rows($Generesult);
+	//echo "<h1>$num_rows results found for \"$keyword\".</h1>";
+	
+	$i = 0;
+	while ($Generesults = mysql_fetch_array($Generesult))
+	{
+		if($i<1) echo "<tr>";
+		?>
+    <td align="left">&nbsp;&nbsp;<input type="checkbox" name="check_list[]" value="<?php echo $Generesults['Gene'];?>" >
+          <?php echo $Generesults['Gene']; ?>
+         <!--  - Qty: <input type="text" name="qty[]" value="1"  style="width:20px"  >--></td> 
+        
+        
+      <?php
+	  	$i++;
+		if($i==6) 
+		{
+			echo "</tr>";
+			$i=0;
+		}
+	}
+
+
+$PrimerList =  implode("\n", $_POST['check_list']);
+$Qty = implode("\n", $_POST['qty']);
+
+session_start();
+
+// create an array
+// put the array in a session variable
+if(!$_SESSION['Genes']) 
+{
+	$_SESSION['Genes']=$_POST['check_list'];
+}
+else
+{
+	foreach($_POST['check_list'] as $clkey=>$clvalue)
+	
+	array_push($_SESSION['Genes'],$clvalue);
+}
+
+
+// a little message to say we have done it
+//foreach($_SESSION['Genes'] as $key=>$value)
+//{
+    // and print out the values
+//    echo 'The value of $_SESSION['."'".$key."'".'] is '."'".$value."'".' <br />';
+//    }
+
+$table = "<table  align=\"center\" border=\"1\" cellpadding=\"10\" cellspacing=\"10\"><tr>";
+		
+		//echo "Summary of your Primers request:";
+		echo $table;
+		
+
+	 
+?>
+<td width="68%"></tbody>
+
+</table>
+
+<center>
+<?php if($Category)
+{
+	echo "<br /><br />Please note that these filters reflect the gene primers we currently have in stock only.  If you notice that your favorite gene is missing, just request it in the Additional Comments or Requests section before requesting your primers.<br />  <br />";
+	?>
+
+<br />
+  <p>
+  	<input type="hidden" name="imagedisplay" value=<?php echo $imagedisplay; ?> />
+   	<input type="hidden" name="category" value=<?php echo $Category; ?> />
+    <input width="40"   type="submit" name="Submit" value=" Add genes to array " style="width:200px;height:40px; color:#F00;">
+
+</form>
+  </p>
+<?php if($imagedisplay){ ?>
+<form name="customizegenequeryform" method="post" enctype="multipart/form-data" action="https://www.sciencellonline.com/genes-quote" onSubmit="return validate.check(this)">
+
+<center>
+<table id="Array" border="1" cellpadding="10" cellspacing="4">
+  <tbody>
+    <tr>
+      <td valign="bottom"  width="9"><p> </p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>1</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>2</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>3</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>4</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>5</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>6</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>7</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>8</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>9</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>10</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>11</strong></p></td>
+      <td valign="bottom"  width="9"><p align="center"><strong>12</strong></p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="25"><p align="center"><strong>A</strong></p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="A1" id="A1" maxlength="7" value="<?php echo $_SESSION['Genes'][0]; ?>" />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="A2" id="A2" maxlength="7" value="<?php echo $_SESSION['Genes'][1]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="A3" id="A3" maxlength="7" value="<?php echo $_SESSION['Genes'][2]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="A4" id="A4" maxlength="7" value="<?php echo $_SESSION['Genes'][3]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="A5" id="A5" maxlength="7" value="<?php echo $_SESSION['Genes'][4] ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="A6" id="A6" maxlength="7" value="<?php echo $_SESSION['Genes'][5]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="A7" id="A7" maxlength="7" value="<?php echo $_SESSION['Genes'][6]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="A8" id="A8" maxlength="7" value="<?php echo $_SESSION['Genes'][7]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="A9" id="A9" maxlength="7" value="<?php echo $_SESSION['Genes'][8]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="A10" id="A10" maxlength="7" value="<?php echo $_SESSION['Genes'][9]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="A11" id="A11" maxlength="7" value="<?php echo $_SESSION['Genes'][10]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="A12" id="A12" maxlength="7" value="<?php echo $_SESSION['Genes'][11]; ?>"  />
+      </p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="15"><p align="center"><strong>B</strong></p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="B1" id="B1" maxlength="7" value="<?php echo $_SESSION['Genes'][12]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="B2" id="B2" maxlength="7" value="<?php echo $_SESSION['Genes'][13]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="B3" id="B3" maxlength="7" value="<?php echo $_SESSION['Genes'][14]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="B4" id="B4" maxlength="7" value="<?php echo $_SESSION['Genes'][15]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="B5" id="B5" maxlength="7" value="<?php echo $_SESSION['Genes'][16]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="B6" id="B6" maxlength="7" value="<?php echo $_SESSION['Genes'][17]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="B7" id="B7" maxlength="7" value="<?php echo $_SESSION['Genes'][18]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="B8" id="B8" maxlength="7" value="<?php echo $_SESSION['Genes'][19]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="B9" id="B9" maxlength="7" value="<?php echo $_SESSION['Genes'][20]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="B10" id="B10" maxlength="7" value="<?php echo $_SESSION['Genes'][21]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="B11" id="B11" maxlength="7" value="<?php echo $_SESSION['Genes'][22]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="B12" id="B12" maxlength="7" value="<?php echo $_SESSION['Genes'][23]; ?>"  />
+      </p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="15"><p align="center"><strong>C</strong></p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="C1" id="C1" maxlength="7" value="<?php echo $_SESSION['Genes'][24]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="C2" id="C2" maxlength="7" value="<?php echo $_SESSION['Genes'][25]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="C3" id="C3" maxlength="7" value="<?php echo $_SESSION['Genes'][26]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="C4" id="C4" maxlength="7" value="<?php echo $_SESSION['Genes'][27]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="C5" id="C5" maxlength="7" value="<?php echo $_SESSION['Genes'][28]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="C6" id="C6" maxlength="7" value="<?php echo $_SESSION['Genes'][29]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="C7" id="C7" maxlength="7" value="<?php echo $_SESSION['Genes'][30]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="C8" id="C8" maxlength="7" value="<?php echo $_SESSION['Genes'][31]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="C9" id="C9" maxlength="7" value="<?php echo $_SESSION['Genes'][32]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="C10" id="C10" maxlength="7" value="<?php echo $_SESSION['Genes'][33]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="C11" id="C11" maxlength="7" value="<?php echo $_SESSION['Genes'][34]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="C12" id="C12" maxlength="7" value="<?php echo $_SESSION['Genes'][35]; ?>"  />
+      </p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="15"><p align="center"><strong>D</strong></p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="D1" id="D1" maxlength="7" value="<?php echo $_SESSION['Genes'][36]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="D2" id="D2" maxlength="7" value="<?php echo $_SESSION['Genes'][37]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="D3" id="D3" maxlength="7" value="<?php echo $_SESSION['Genes'][38]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="D4" id="D4" maxlength="7" value="<?php echo $_SESSION['Genes'][39]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="D5" id="D5" maxlength="7" value="<?php echo $_SESSION['Genes'][40]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="D6" id="D6" maxlength="7" value="<?php echo $_SESSION['Genes'][41]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="D7" id="D7" maxlength="7" value="<?php echo $_SESSION['Genes'][42]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="D8" id="D8" maxlength="7" value="<?php echo $_SESSION['Genes'][43]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="D9" id="D9" maxlength="7" value="<?php echo $_SESSION['Genes'][44]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="D10" id="D10" maxlength="7" value="<?php echo $_SESSION['Genes'][45]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="D11" id="D11" maxlength="7" value="<?php echo $_SESSION['Genes'][46]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="D12" id="D12" maxlength="7" value="<?php echo $_SESSION['Genes'][47]; ?>"  />
+      </p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="15"><p align="center"><strong>E</strong></p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="E1" id="E1" maxlength="7" value="<?php echo $_SESSION['Genes'][48]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="E2" id="E2" maxlength="7" value="<?php echo $_SESSION['Genes'][49]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="E3" id="E3" maxlength="7" value="<?php echo $_SESSION['Genes'][50]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="E4" id="E4" maxlength="7" value="<?php echo $_SESSION['Genes'][51]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="E5" id="E5" maxlength="7" value="<?php echo $_SESSION['Genes'][52]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="E6" id="E6" maxlength="7" value="<?php echo $_SESSION['Genes'][53]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="E7" id="E7" maxlength="7" value="<?php echo $_SESSION['Genes'][54]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="E8" id="E8" maxlength="7" value="<?php echo $_SESSION['Genes'][55]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="E9" id="E9" maxlength="7" value="<?php echo $_SESSION['Genes'][56]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="E10" id="E10" maxlength="7" value="<?php echo $_SESSION['Genes'][57]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="E11" id="E11" maxlength="7" value="<?php echo $_SESSION['Genes'][58]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="E12" id="E12" maxlength="7" value="<?php echo $_SESSION['Genes'][59]; ?>"  />
+      </p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="15"><p align="center"><strong>F</strong></p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="F1" id="F1" maxlength="7" value="<?php echo $_SESSION['Genes'][60]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="F2" id="F2" maxlength="7" value="<?php echo $_SESSION['Genes'][61]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="F3" id="F3" maxlength="7" value="<?php echo $_SESSION['Genes'][62]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="F4" id="F4" maxlength="7" value="<?php echo $_SESSION['Genes'][63]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="F5" id="F5" maxlength="7" value="<?php echo $_SESSION['Genes'][64]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="F6" id="F6" maxlength="7" value="<?php echo $_SESSION['Genes'][65]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="F7" id="F7" maxlength="7" value="<?php echo $_SESSION['Genes'][66]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="F8" id="F8" maxlength="7" value="<?php echo $_SESSION['Genes'][67]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="F9" id="F9" maxlength="7" value="<?php echo $_SESSION['Genes'][68]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="F10" id="F10" maxlength="7" value="<?php echo $_SESSION['Genes'][69]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="F11" id="F11" maxlength="7" value="<?php echo $_SESSION['Genes'][70]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="F12" id="F12" maxlength="7" value="<?php echo $_SESSION['Genes'][71]; ?>"  />
+      </p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="15"><p align="center"><strong>G</strong></p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="G1" id="G1" maxlength="7" value="<?php echo $_SESSION['Genes'][72]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="G2" id="G2" maxlength="7" value="<?php echo $_SESSION['Genes'][73]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="G3" id="G3" maxlength="7" value="<?php echo $_SESSION['Genes'][74]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="G4" id="G4" maxlength="7" value="<?php echo $_SESSION['Genes'][75]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="G5" id="G5" maxlength="7" value="<?php echo $_SESSION['Genes'][76]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="G6" id="G6" maxlength="7" value="<?php echo $_SESSION['Genes'][77]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="G7" id="G7" maxlength="7" value="<?php echo $_SESSION['Genes'][78]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="G8" id="G8" maxlength="7" value="<?php echo $_SESSION['Genes'][79]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="G9" id="G9" maxlength="7" value="<?php echo $_SESSION['Genes'][80]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="G10" id="G10" maxlength="7" value="<?php echo $_SESSION['Genes'][81]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="G11" id="G11" maxlength="7" value="<?php echo $_SESSION['Genes'][82]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="G12" id="G12" maxlength="7" value="<?php echo $_SESSION['Genes'][83]; ?>"  />
+      </p></td>
+    </tr>
+    <tr>
+      <td valign="bottom"  width="15"><p align="center"><strong>H</strong></p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="H1" id="H1" maxlength="7" value="<?php echo $_SESSION['Genes'][84]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="H2" id="H2" maxlength="7" value="<?php echo $_SESSION['Genes'][85]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="H3" id="H3" maxlength="7" value="<?php echo $_SESSION['Genes'][86]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="H4" id="H4" maxlength="7" value="<?php echo $_SESSION['Genes'][87]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="H5" id="H5" maxlength="7" value="<?php echo $_SESSION['Genes'][88]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="H6" id="H6" maxlength="7" value="<?php echo $_SESSION['Genes'][89]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="H7" id="H7" maxlength="7" value="<?php echo $_SESSION['Genes'][90]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="H8" id="H8" maxlength="7" value="<?php echo $_SESSION['Genes'][91]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="H9" id="H9" maxlength="7" value="<?php echo $_SESSION['Genes'][92]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="15"><p><input DISABLED style="width:55px"   type="text" name="H10" id="H10" maxlength="7" value="<?php echo $_SESSION['Genes'][93]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="9"><p><input DISABLED style="width:55px"   type="text" name="H11" id="H11" maxlength="7" value="<?php echo $_SESSION['Genes'][94]; ?>"  />
+      </p></td>
+      <td valign="bottom"  width="9"><p><input DISABLED style="width:55px"   type="text" name="H12" id="H12" maxlength="7" value="<?php echo $_SESSION['Genes'][95]; ?>"  />
+      </p></td>
+    </tr>
+  </tbody>
+</table>
+<a href="?Matrix=clear&amp;Treelink=<?php echo $imagedisplay; ?>&amp;Category=<?php echo $Category; ?>#Array">Clear Matrix</a><br /><br />
+</center>
+
+<input width="40"   type="submit" name="EDIT" value=" Review and Get Quote  " style="width:200px;height:40px; color:#F00;">
+</form>
+
+<?php } ?>
+
+<?php } ?>
+<center>
+  <p>&nbsp;</p>
+  <p><a href="https://sciencellonline.com/about/terms-and-conditions.html">Terms of Service</a> || <a href="https://sciencellonline.com/about/privacy-policy.html">Privacy Policy</a> || <a href="https://www.sciencellonline.com/about/ethical-statement.html">Shipping and Return Policy</a></p>
+</center>
+<div> qPCR gene reference tool © 2016 Sciencell Research Laboratories Inc. All Rights Reserved. | <img alt="Thermo Fisher" src="https://www.lifetechnologies.com/shared-static/images/icons/flags/us.gif" /></div>

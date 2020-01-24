@@ -1,0 +1,106 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+
+<div>
+Search for Publications on a Product by Catalog Number below:
+  <div>
+<form action="https://sciencellonline.com/technical-support/publications.html" method="get" name="search">
+<input name="publication" type="hidden" value="publication">
+<input name="keyword" type="text" value="SEARCH" onfocus="this.value=''" size="30" maxlength="30" />
+<input type="image" alt="Go" value="coasearch" src="http://www.sciencellonline.com/OLDSITE/site/images/button_go1.gif" style="vertical-align: middle; margin-left: 5px;" />
+</form>
+
+<br>
+
+<?php 
+
+$pubsearch = $_GET['publication'];
+$Catno = $_GET['keyword'];
+
+if ($pubsearch)
+{
+//Connect To Database
+$hostname='localhost';
+$username='poweruserdb';
+$password='Manoj1234';
+$dbname='poweruserdb';
+$usertable='your_tablename';
+$yourfield = 'your_field';
+
+mysql_connect($hostname,$username, $password) OR DIE ('Unable to connect to database! Please try again later.');
+mysql_select_db($dbname);
+
+$resultPub=mysql_query("SELECT * FROM `Publication` WHERE Catno = '$Catno' ORDER by Yr DESC");
+
+$num_rows_Pub = mysql_num_rows($resultPub);
+$i = 0;
+//echo $num_rows;
+			
+//echo "<h1><span id=\"title\"><b> Publications for ",$keyword,"</b></span></h1><br  />";
+				
+	if($num_rows_Pub)
+	{	
+		echo "";
+		while ($resultsPub = mysql_fetch_array($resultPub))
+		{
+			$Journal=$resultsPub['Journal'];
+			$Citation=$resultsPub['Citation'];
+			$URL=$resultsPub['Link'];
+			$journalwithi = "<i>".$Journal."</i>";
+			$Citation = str_replace( $Journal, $journalwithi , $Citation );
+			$i = $i + 1;
+				if($URL)
+			{
+				$Citation = "<a href=$URL target=_BLANK >".$Citation."</a>";
+				//echo "<br /><b> Full text link <a href=$URL target=_BLANK >HERE</a></b> ";
+			}
+			echo $i, ".) " ,$Citation,"";
+			echo "<br /><br />";
+                        if ($i > 19) {
+				break;
+			}
+		}
+		echo "<p><strong>ScienCell Research Laboratories (SRL) takes pride in being a resource for researchers all over the world. The publications listed here are not meant as an endorsement or confirmation of the reliability of the research methods. Our sole intention of sharing the research publications listed here is to provide research related insights and innovations of our products with other researchers.</strong></p>
+		<br />";
+		
+	}
+	else 
+	{
+		echo "No Publication available at this time";
+	}
+}
+
+?>
+</div>
+</div>

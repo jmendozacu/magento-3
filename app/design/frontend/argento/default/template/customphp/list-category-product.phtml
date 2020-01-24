@@ -1,0 +1,30 @@
+<?php
+$_categoryId = $this->getCategoryId();
+
+$_productCollection = Mage::getModel('catalog/category')->load($_categoryId)
+    ->getProductCollection()
+    ->addAttributeToSelect('*')
+    ->addAttributeToFilter('status', 1)
+    ->addAttributeToFilter('visibility', 4)
+    ->setOrder('price', 'ASC');
+?>
+
+<div class="featured-product">
+    <h2><?php echo $this->__( $this->getLabel() ); ?></h2>
+
+    <?php foreach ($_productCollection as $_product): ?>
+        <div class="item">
+            <a class="product-image" href="<?php echo $_product->getProductUrl() ?>">
+                <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(200); ?>" alt="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" />
+            </a>
+
+            <a class="product-name" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->htmlEscape($_product->getName()) ?></a>
+
+            <?php echo $this->getPriceHtml($_product, true) ?>
+        </div>
+
+       
+    <?php endforeach ?>
+</div>
+
+

@@ -1,0 +1,76 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+
+<div>
+Search for a lot number: 
+<div>
+<form action="https://sciencellonline.com/technical-support/certificate-of-analysis.html" method="get" name="search">
+<input name="coasearch" type="hidden" value="coasearch">
+<input name="keyword" type="text" value="SEARCH" onfocus="this.value=''" size="30" maxlength="30" />
+<input type="image" alt="Go" value="coasearch" src="https://www.sciencellonline.com/OLDSITE/site/images/button_go1.gif" style="vertical-align: middle; margin-left: 5px;" />
+</form>
+
+<br>
+
+<?php 
+
+$coasearch = $_GET['coasearch'];
+$filename = $_GET['keyword'];
+
+if ($coasearch)
+{
+$URL = Mage::getBaseDir();
+//echo $URL;
+
+$filepath = '/home/sciencell1/public_html/COA/'.$filename.'.pdf';
+//echo $filepath;
+if (file_exists($filepath)) 
+{
+	if(!Mage::getSingleton('customer/session')->isLoggedIn()){
+        //not logged in
+		echo "<br/><h2>Login to proceeed</h2>Please login above or <a href=https://www.sciencellonline.com/customer/account/create/ >Register</a> to view Certificate of Analysis for lot number $filename";
+    }else{
+        // logged in
+		echo "<br/>Download certificate of analysis for  
+	<a href=http://www.sciencellonline.com/COA/$filename.pdf target=_blank > Lot Number $filename</a>";
+	echo "<br/><a title=Certificate of Analysis href=http://www.sciencellonline.com/COA/$filename.pdf target=_blank><img title=Certificate of Analysis src=http://www.sciencellonline.com/media/wysiwyg/pdf-download-icon.jpg alt=Certificate of analysis /></a><br/>";
+    }
+    
+} else {
+	echo "<br/><p><b>We apologize for the inconvenience, but the Certificate of Analysis for Lot Number $filename is not currently available on-line. Please email your request to info@sciencellonline.com and we will respond as soon as possible.</b></p>";
+}
+}
+?>
+</div>
+</div>

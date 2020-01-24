@@ -1,0 +1,99 @@
+<?php 
+$AntiSpam = $_POST['AntiSpam'];
+if(isset($_POST['Submit']))
+{
+	if ($AntiSpam == '25')
+	{
+		if($_FILES['uploadedfile']['name'] != NULL)
+		{	
+		$target_path = "/home/sciencell1/public_html/PrimerUploads/";
+
+		/* Add the original filename to our target path. Result is "uploads/filename.extension" */
+		$_FILES['uploadedfile']['name'] = str_replace (" ", "",$_FILES['uploadedfile']['name']);
+		$target_path = $target_path . basename( $_FILES['uploadedfile']['name']); 
+		
+			if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
+				echo "</br><p><b>The file ".basename( $_FILES['uploadedfile']['name'])." has been uploaded</b></p></br>";
+				$Designinfo = "http://sciencellonline.com/PrimerUploads/".basename( $_FILES['uploadedfile']['name']);
+			} else{
+				echo "</br><p><b>There was an error uploading the file, please try again!</b></p></br>";
+			}
+		}
+		else echo "There was no file attached! please check. ";
+			
+		$to = "yli@sciencellonline.com";
+		$subject = "GeneQuery Custom Order";
+		$from = "checkfile@email.com";
+		$message = "Hi Daniel,\r\nA custom order for GeneQuery was just uploaded. \n\n download file here: $Designinfo ";
+		$headers = "From: $from \r\n";
+		$headers .= "Reply-To: $from \r\n";
+		$headers .= "Return-Path: $from \r\n";
+		$headers .= "X-Mailer: PHP \r\n";
+		
+		if(mail($to,$subject,$message,$headers)) 
+		{
+			echo "<br /><div align=\"left\"><b><span>We appreciate your interest in ScienCell products, One of us will get right back to you!</span></b></div><br />";
+		}
+		else
+			echo "Not Sent!";
+		
+	}
+	else
+		echo "The Antispam answer you provided is wrong, please try again";
+}
+else
+{
+?>	
+<form name="customizegenequeryform" method="post" enctype="multipart/form-data" action="https://www.sciencellonline.com/products-services/gene-expression-profiling/customize-your-primers.html" onsubmit="return validate.check(this)"> 
+<p><h1>
+Stop spending your precious time on primer design and testing. <br />Let our experts help!</h1>
+<p><br />
+  ScienCell Research Laboratories understands that you have unique research needs.  We gladly offer  custom primer design and kit services.</p>
+<table width="717" height="219" border="1">
+  <tr>
+    <td width="217" height="213"><center>
+      <h1>STEP 1</h1>
+    </center>
+      <center>
+        <p>Download the template file for your gene selection below</p>
+        <p><a href="http://sciencellonline.com/Documents/GeneQuery-Custom-Order-Template.xls"><img src="https://www.sciencellonline.com/images/download2.png" alt="Excel file download" /></a></p>
+      </center></td>
+    <td width="138"><center>
+      <h1>STEP 2</h1>
+      <h1><img src="https://www.sciencellonline.com/images/upload.png" alt="Excel file download" /></h1>
+      <p>
+        <input type="hidden" name="MAX_FILE_SIZE2" value="1000000" />
+Upload your primer list :</p>
+      <p>
+       <b> <input name="uploadedfile2" type="file" /></b>
+      </p>
+      <p>&nbsp;</p></td>
+  </tr>
+</table>
+<table style="width:100%; height:100%" border="0" >
+ 
+    <tr><td width="123" height="158"><p>We will deliver  qPCR ready kits and primer products in a timely manner to support your  research, and make sure that: </p>
+  <p>(i) the optimal annealing temperature in qPCR  analysis is 65°C (with 2 mM Mg2+, and no DMSO) <br />
+    (ii) the primer set  recognizes all known transcript variants of target gene, unless otherwise  indicated and <br />
+    (iii) only one gene is amplified </p></br>
+  <p>In addition, all primer sets  will be validated by qPCR with melt curve analysis, and gel electrophoresis.<br />
+</p></td></tr>
+  <tr>
+    <td height="62" align="center">To help prevent automated spam, please answer this question <br />
+      <br />
+      <div class="antispamquestion"> Using only numbers, what is 10 plus 15? <span class="required_star"> * </span> &nbsp;
+        <input width="40"   type="text" name="AntiSpam" id="AntiSpam" maxlength="100" style="width:60px" required>
+    </div><br /></td>
+    
+  </tr>
+  <tr>
+    <td><center>
+      <input width="40"   type="submit" name="Submit" value=" Submit Form " style="width:200px;height:40px; color:#F00;">
+      </center>&nbsp;</td>
+  </tr>
+
+</table>
+</form>
+<?php
+}
+?>

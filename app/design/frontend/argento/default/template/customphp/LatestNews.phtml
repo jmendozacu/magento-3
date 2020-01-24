@@ -1,0 +1,72 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="page-title">
+    <h1><?php echo Mage::helper('contacts')->__('Email, Call or Chat with us') ?></h1>
+</div>
+<p><img title="Contact From" src='http://www.sciencellonline.com/media/wysiwyg/contact-us-banner.jpg' alt="Contact Us" /></p>
+<p>Your questions and comments are important to us. Chat Live using tool below, or reach us by phone or email. We&rsquo;ve got everything covered for your needs.</p>
+<div>&nbsp;</div>
+<table border="0">
+<tbody>
+<tr>
+<td width="297"><strong>Address:</strong><br /> 6076 Corte Del Cedro<br /> Carlsbad, CA 92011<br /><br /><strong>Call us:</strong><br /> 877.602.8549 or 760.602.8549<br /><br /><strong>Fax us:</strong> <br />760.602.8575.</td>
+<td width="293">
+<p style="text-align: left;"><strong>For Sales</strong><br /> 
+sales@sciencellonline.com<br /><br /><strong>For General Information</strong> <br />
+info@sciencellonline.com<br /><br />
+<strong>For issues concerning this website</strong> webmaster@sciencellonline.com</p>
+</td>
+<td><form name="name" method="post" action="sciencellonline.com">
+  <p>
+    <label for="Name">Name</label>
+    <input type="text" name="Name" id="Name">
+  </p>
+  <p>
+  <input type="submit" name="submit" id="submit" value="Submit">
+  </p>
+</form>
+</td>
+</tr>
+</tbody>
+</table>
+<?php 
+
+if(isset($_POST['submit']))
+{
+	$Name = $_POST['name'];
+	echo "Hello ", $Name;
+}
+	
+	
+?>
+
+<script type="text/javascript">
+//<![CDATA[
+    var contactForm = new VarienForm('contactForm', true);
+//]]>
+</script>

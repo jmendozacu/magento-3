@@ -1,0 +1,69 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+
+<div>
+Search for a Product Sheet by Catalog Number below: 
+  <div>
+<form action="https://sciencellonline.com/technical-support/manuals-and-protocols.html" method="get" name="search">
+<input name="productsheet" type="hidden" value="productsheet">
+<input name="keyword" type="text" value="SEARCH" onfocus="this.value=''" size="30" maxlength="30" />
+<input type="image" alt="Go" value="coasearch" src="https://www.sciencellonline.com/OLDSITE/site/images/button_go1.gif" style="vertical-align: middle; margin-left: 5px;" />
+</form>
+
+<br>
+
+<?php 
+
+$pssearch = $_GET['productsheet'];
+$filename = $_GET['keyword'];
+
+if ($pssearch)
+{
+$URL = Mage::getBaseDir();
+//echo $URL;
+
+$filepath = '/home/sciencell1/public_html/PS/'.$filename.'.pdf';
+//echo $filepath;
+if (file_exists($filepath)) 
+{
+    echo "Results for Cat #$filename :: 
+	<a href=https://www.sciencellonline.com/PS/$filename.pdf target=_blank >VIEW PRODUCT SHEET</a>";
+} else {
+	echo "Product Sheet for Catalog Number $filename does not exist or not available at this time";
+}
+}
+
+?>
+</div>
+</div>

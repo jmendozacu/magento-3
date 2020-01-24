@@ -1,0 +1,660 @@
+<?php
+//Connect To Database
+$hostname='localhost';
+$username='poweruserdb';
+$password='Manoj1234';
+$dbname='poweruserdb';
+$usertable='your_tablename';
+$yourfield = 'your_field';
+
+mysql_connect($hostname,$username, $password) OR DIE ('Unable to connect to database! Please try again later.');
+mysql_select_db($dbname);
+
+?>
+<script src="http://www.sciencellonline.com/TABS/tabcontent.js" type="text/javascript"></script>
+<link href="http://www.sciencellonline.com/TABS/template1/tabcontent.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="http://www.sciencellonline.com/ACCORDION/jquery-ui.css">
+  <script src="http://www.sciencellonline.com/ACCORDION/jquery-1.10.2.js"></script>
+  <script src="http://www.sciencellonline.com/ACCORDION/jquery-ui.js"></script>
+  <script>
+  $(function() {
+    $( "#accordion" ).accordion();
+	 $( "#accordion2" ).accordion();
+  });
+  </script>
+  
+<?php 
+$AntiSpam = $_POST['AntiSpam'];
+if(isset($_POST['Submit']))
+{
+	if ($AntiSpam == '25')
+	{
+		$Full_Name = $_POST['Full_Name'];
+		$Email_Address = $_POST['Email_Address'];
+		$Telephone_Number = $_POST['Telephone_Number'];
+		$Your_Message = $_REQUEST['Your_Message'];
+		$Institution = $_POST['Institution'];
+		$Format = $_POST['format'];
+		$Model = $_POST['model'];
+		
+		$PrimerList =  implode("\n", $_POST['check_list']);
+		$Qty = implode("\n", $_POST['qty']);
+		//$Qty = array_filter($Qty, 'strlen');
+		//echo $PrimerList;
+		//echo $Qty;
+		//echo "<br/><br/>";
+		//foreach( $_POST['qty'] as $Q){
+		//	if($Q ==0) { unset($Q); }
+		//	}
+	    $table = "<table  align=\"center\" border=\"1\" cellpadding=\"10\" cellspacing=\"10\"><tr><td align=\"center\">&nbsp;&nbsp;Primer Symbol&nbsp;&nbsp;</td>";
+		foreach ($_POST['check_list'] as $key => $P){
+			//if($_POST['qty'][$key] == '0') continue;
+			//else
+			$table = $table . "<td>&nbsp;&nbsp;$P&nbsp;&nbsp;</td>";
+			}
+		$table = $table. "</tr><tr><td align=\"center\">&nbsp;&nbsp;Quantity&nbsp;&nbsp;</td>";
+  		foreach ($_POST['qty'] as $Q){
+			if ($Q == '0') continue;
+			else
+			$table = $table . "<td>&nbsp;&nbsp;$Q&nbsp;&nbsp;</td>";
+			}
+		$table = $table . "</tr></table>";
+		
+		$HTMLtable = "<HTML><BODY>" . $table . "</BODY></HTML>";
+		echo "Summary of your Primers request:";
+		echo $table;
+		//echo $PrimerList, $Qty;
+				
+		$to = "yli@sciencellonline.com";
+		$subject = "INDIVIDUAL PRIMER SET REQUEST";
+		$from  = 'MIME-Version: 1.0' . "\r\n";
+		$from .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		$from .= "From: ".$Email_Address;
+		$body = "From: $Full_Name </br> E-Mail: $Email_Address </br> Name of the Institution: $Institution </br> Experiment details: $Your_Message </br> Requested Format: $Format </br> Model: $Model </br> Requested Primers: </br></br> $HTMLtable " ;
+		$mailsnt=mail($to, $subject, $body, $from);
+		if($mailsnt)
+			echo "<br /><div align=\"left\"><b><span>We appreciate your interest in ScienCell products, One of us will get right back to you!</span></b></div><br />";
+		else
+			echo "Not Sent!";
+	}
+	else
+		echo "The Antispam answer you provided is wrong, please try again";
+}
+else
+{
+	?>
+    
+<form name="customizegenequeryform" method="post" enctype="multipart/form-data" action="https://www.sciencellonline.com/products-services/gene-analysis/individual-primer-sets.html" onsubmit="return validate.check(this)">
+
+
+<div style="width: 720px; margin: 0 auto;">
+        <ul class="tabs" data-persist="true">
+            <li><a href="#view0">cell markers</a></li>
+            <li><a href="#view1">Cell Biology</a></li>
+            <li><a href="#view2">Physiological Processes</a></li>
+            <li><a href="#view3">Pathologies</a></li>
+             <li><a href="#view3">controls</a></li>
+           
+            
+    </ul>
+        <div class="tabcontents">
+        
+       	  <div id="view0">
+              <p>    
+            <div id="accordion">
+  <h3>Section 1</h3>
+  <div>
+    <p>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tbody>
+    <tr>
+   		<th width="15%" style="background-color:#CCC"  scope="col">GENE SYMBOL</th>
+        <th width="15%" style="background-color:#CCC"  scope="col">CAT. NO.</th>
+      <th width="35%" style="background-color:#CCC"  scope="col">DESCRIPTION</th>
+      <th width="5%" style="background-color:#CCC"  scope="col">Qty</th>
+         <th width="10%" style="background-color:#CCC"  scope="col"></th>
+    </tr>
+    <?php 
+	$result=mysql_query("SELECT * FROM PrimerSet WHERE Category = 'gap'");
+	$num_rows = mysql_num_rows($result);
+	//echo "<h1>$num_rows results found for \"$keyword\".</h1>";
+	//echo "<ol>";
+	while ($results = mysql_fetch_array($result))
+	{
+		$rest = substr($results['Catno'], -3 );
+		$string = $results['Catno'];
+		?>
+    
+    <tr>
+      <td align="left" height="20" ><?php echo $results['symbol']; ?></td>
+      <td><?php echo $results['Catno']; ?></td>
+      <td><?php echo $results['name']; ?> </td>
+       <td><input type="text" name="qty[]" id="qty" value="0" maxlength="3" style="width:25px" />
+         </span>
+       </td>
+ 	  <td>
+        <span><input type="checkbox" name="check_list[]" value="<?php echo $results['symbol'];?>" ></span>
+      </td>  
+            
+      </tr>  
+       
+<?php 
+	} ?>
+        </table>
+    </p>
+  </div>
+  <h3>Section 2</h3>
+  <div>
+    <p>
+    Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+    purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+    velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+    suscipit faucibus urna.
+    </p>
+  </div>
+  <h3>Section 3</h3>
+  <div>
+    <p>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tbody>
+    <tr>
+   		<th width="15%" style="background-color:#CCC"  scope="col">GENE SYMBOL</th>
+        <th width="15%" style="background-color:#CCC"  scope="col">CAT. NO.</th>
+      <th width="35%" style="background-color:#CCC"  scope="col">DESCRIPTION</th>
+      <th width="5%" style="background-color:#CCC"  scope="col">Qty</th>
+         <th width="10%" style="background-color:#CCC"  scope="col"></th>
+    </tr>
+    <?php 
+	$result=mysql_query("SELECT * FROM PrimerSet WHERE Category = 'gap'");
+	$num_rows = mysql_num_rows($result);
+	//echo "<h1>$num_rows results found for \"$keyword\".</h1>";
+	//echo "<ol>";
+	while ($results = mysql_fetch_array($result))
+	{
+		$rest = substr($results['Catno'], -3 );
+		$string = $results['Catno'];
+		?>
+    
+    <tr>
+      <td align="left" height="20" ><?php echo $results['symbol']; ?></td>
+      <td><?php echo $results['Catno']; ?></td>
+      <td><?php echo $results['name']; ?> </td>
+       <td><input type="text" name="qty[]" id="qty" value="0" maxlength="3" style="width:25px" />
+         </span>
+       </td>
+ 	  <td>
+        <span><input type="checkbox" name="check_list[]" value="<?php echo $results['symbol'];?>" ></span>
+      </td>  
+            
+      </tr>  
+       
+<?php 
+	} ?>
+        </table>
+    </p>
+    <ul>
+      <li>List item one</li>
+      <li>List item two</li>
+      <li>List item three</li>
+    </ul>
+  </div>
+  <h3>Section 4</h3>
+  <div>
+    <p>
+    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+    et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+    faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+    mauris vel est.
+    </p>
+    <p>
+    Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+    inceptos himenaeos.
+    </p>
+  </div>
+</div>    
+              
+    </p>
+                
+          </div>
+       	  <div id="view1">
+       	    <p>&nbsp; </p>
+       	    <div id="accordion2">
+       	      <h3>Cell cycling/growth</h3>
+       	      <div>
+       	        <p>&nbsp;</p>
+       	        <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+       	          <tbody>
+       	            <tr>
+       	              <th width="15%" style="background-color:#CCC"  scope="col">GENE SYMBOL</th>
+       	              <th width="15%" style="background-color:#CCC"  scope="col">CAT. NO.</th>
+       	              <th width="35%" style="background-color:#CCC"  scope="col">DESCRIPTION</th>
+       	              <th width="5%" style="background-color:#CCC"  scope="col">Qty</th>
+       	              <th width="10%" style="background-color:#CCC"  scope="col"></th>
+   	                </tr>
+       	            <?php 
+	$result=mysql_query("SELECT * FROM PrimerSet WHERE Category = 'gap'");
+	$num_rows = mysql_num_rows($result);
+	//echo "<h1>$num_rows results found for \"$keyword\".</h1>";
+	//echo "<ol>";
+	while ($results = mysql_fetch_array($result))
+	{
+		$rest = substr($results['Catno'], -3 );
+		$string = $results['Catno'];
+		?>
+       	            <tr>
+       	              <td align="left" height="20" ><?php echo $results['symbol']; ?></td>
+       	              <td><?php echo $results['Catno']; ?></td>
+       	              <td><?php echo $results['name']; ?></td>
+       	              <td><input type="text" name="qty" id="qty2" value="0" maxlength="3" style="width:25px" />
+       	                </span></td>
+       	              <td><span>
+       	                <input type="checkbox" name="check_list[]2" value="<?php echo $results['symbol'];?>" />
+     	                </span></td>
+   	                </tr>
+       	            <?php 
+	} ?>
+   	              </tbody>
+   	            </table>
+       	        </p>
+   	          </div>
+       	      <h3>Transport</h3>
+       	      <div>
+       	        <p> Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+       	          purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+       	          velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+       	          suscipit faucibus urna. </p>
+   	          </div>
+       	      <h3>motility</h3>
+       	      <div>
+       	    
+       	        <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+       	          <tbody>
+       	            <tr>
+       	              <th width="15%" style="background-color:#CCC"  scope="col">GENE SYMBOL</th>
+       	              <th width="15%" style="background-color:#CCC"  scope="col">CAT. NO.</th>
+       	              <th width="35%" style="background-color:#CCC"  scope="col">DESCRIPTION</th>
+       	              <th width="5%" style="background-color:#CCC"  scope="col">Qty</th>
+       	              <th width="10%" style="background-color:#CCC"  scope="col"></th>
+   	                </tr>
+       	            <?php 
+	$result=mysql_query("SELECT * FROM PrimerSet WHERE Category = 'gap'");
+	$num_rows = mysql_num_rows($result);
+	//echo "<h1>$num_rows results found for \"$keyword\".</h1>";
+	//echo "<ol>";
+	while ($results = mysql_fetch_array($result))
+	{
+		$rest = substr($results['Catno'], -3 );
+		$string = $results['Catno'];
+		?>
+       	            <tr>
+       	              <td align="left" height="20" ><?php echo $results['symbol']; ?></td>
+       	              <td><?php echo $results['Catno']; ?></td>
+       	              <td><?php echo $results['name']; ?></td>
+       	              <td><input type="text" name="qty" id="qty2" value="0" maxlength="3" style="width:25px" />
+       	                </span></td>
+       	              <td><span>
+       	                <input type="checkbox" name="check_list[]2" value="<?php echo $results['symbol'];?>" />
+     	                </span></td>
+   	                </tr>
+       	            <?php 
+	} ?>
+   	              </tbody>
+   	            </table>
+       	        </p>
+       	        <ul>
+       	          <li>List item one</li>
+       	          <li>List item two</li>
+       	          <li>List item three</li>
+   	            </ul>
+   	          </div>
+       	      <h3>metabolism</h3>
+       	      <div>
+       	        </p>
+       	        <ul>
+       	          <li>autophagy
+       	            <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+       	              <tbody>
+       	                <tr>
+       	                  <th width="15%" style="background-color:#CCC"  scope="col">GENE SYMBOL</th>
+       	                  <th width="15%" style="background-color:#CCC"  scope="col">CAT. NO.</th>
+       	                  <th width="35%" style="background-color:#CCC"  scope="col">DESCRIPTION</th>
+       	                  <th width="5%" style="background-color:#CCC"  scope="col">Qty</th>
+       	                  <th width="10%" style="background-color:#CCC"  scope="col"></th>
+   	                    </tr>
+       	                <?php 
+	$result=mysql_query("SELECT * FROM PrimerSet WHERE Category = 'gap'");
+	$num_rows = mysql_num_rows($result);
+	//echo "<h1>$num_rows results found for \"$keyword\".</h1>";
+	//echo "<ol>";
+	while ($results = mysql_fetch_array($result))
+	{
+		$rest = substr($results['Catno'], -3 );
+		$string = $results['Catno'];
+		?>
+       	                <tr>
+       	                  <td align="left" height="20" ><?php echo $results['symbol']; ?></td>
+       	                  <td><?php echo $results['Catno']; ?></td>
+       	                  <td><?php echo $results['name']; ?></td>
+       	                  <td><input type="text" name="qty2" id="qty3" value="0" maxlength="3" style="width:25px" />
+       	                    </span></td>
+       	                  <td><span>
+       	                    <input type="checkbox" name="check_list[]3" value="<?php echo $results['symbol'];?>" />
+     	                    </span></td>
+   	                    </tr>
+       	                <?php 
+	} ?>
+   	                  </tbody>
+   	                </table>
+       	          </li>
+                  
+       	          <li>glycolysis
+       	            <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+       	              <tbody>
+       	                <tr>
+       	                  <th width="15%" style="background-color:#CCC"  scope="col">GENE SYMBOL</th>
+       	                  <th width="15%" style="background-color:#CCC"  scope="col">CAT. NO.</th>
+       	                  <th width="35%" style="background-color:#CCC"  scope="col">DESCRIPTION</th>
+       	                  <th width="5%" style="background-color:#CCC"  scope="col">Qty</th>
+       	                  <th width="10%" style="background-color:#CCC"  scope="col"></th>
+   	                    </tr>
+       	                <?php 
+	$result=mysql_query("SELECT * FROM PrimerSet WHERE Category = 'gap'");
+	$num_rows = mysql_num_rows($result);
+	//echo "<h1>$num_rows results found for \"$keyword\".</h1>";
+	//echo "<ol>";
+	while ($results = mysql_fetch_array($result))
+	{
+		$rest = substr($results['Catno'], -3 );
+		$string = $results['Catno'];
+		?>
+       	                <tr>
+       	                  <td align="left" height="20" ><?php echo $results['symbol']; ?></td>
+       	                  <td><?php echo $results['Catno']; ?></td>
+       	                  <td><?php echo $results['name']; ?></td>
+       	                  <td><input type="text" name="qty3" id="qty4" value="0" maxlength="3" style="width:25px" />
+       	                    </span></td>
+       	                  <td><span>
+       	                    <input type="checkbox" name="check_list[]4" value="<?php echo $results['symbol'];?>" />
+     	                    </span></td>
+   	                    </tr>
+       	                <?php 
+	} ?>
+   	                  </tbody>
+   	                </table>
+       	          </li>
+       	          <li>respiration
+       	            <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+       	              <tbody>
+       	                <tr>
+       	                  <th width="15%" style="background-color:#CCC"  scope="col">GENE SYMBOL</th>
+       	                  <th width="15%" style="background-color:#CCC"  scope="col">CAT. NO.</th>
+       	                  <th width="35%" style="background-color:#CCC"  scope="col">DESCRIPTION</th>
+       	                  <th width="5%" style="background-color:#CCC"  scope="col">Qty</th>
+       	                  <th width="10%" style="background-color:#CCC"  scope="col"></th>
+   	                    </tr>
+       	                <?php 
+	$result=mysql_query("SELECT * FROM PrimerSet WHERE Category = 'gap'");
+	$num_rows = mysql_num_rows($result);
+	//echo "<h1>$num_rows results found for \"$keyword\".</h1>";
+	//echo "<ol>";
+	while ($results = mysql_fetch_array($result))
+	{
+		$rest = substr($results['Catno'], -3 );
+		$string = $results['Catno'];
+		?>
+       	                <tr>
+       	                  <td align="left" height="20" ><?php echo $results['symbol']; ?></td>
+       	                  <td><?php echo $results['Catno']; ?></td>
+       	                  <td><?php echo $results['name']; ?></td>
+       	                  <td><input type="text" name="qty5" id="qty6" value="0" maxlength="3" style="width:25px" />
+       	                    </span></td>
+       	                  <td><span>
+       	                    <input type="checkbox" name="check_list[]6" value="<?php echo $results['symbol'];?>" />
+     	                    </span></td>
+   	                    </tr>
+       	                <?php 
+	} ?>
+   	                  </tbody>
+   	                </table>
+       	          </li>
+       	          <li>lipids
+       	            <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+       	              <tbody>
+       	                <tr>
+       	                  <th width="15%" style="background-color:#CCC"  scope="col">GENE SYMBOL</th>
+       	                  <th width="15%" style="background-color:#CCC"  scope="col">CAT. NO.</th>
+       	                  <th width="35%" style="background-color:#CCC"  scope="col">DESCRIPTION</th>
+       	                  <th width="5%" style="background-color:#CCC"  scope="col">Qty</th>
+       	                  <th width="10%" style="background-color:#CCC"  scope="col"></th>
+   	                    </tr>
+       	                <?php 
+	$result=mysql_query("SELECT * FROM PrimerSet WHERE Category = 'gap'");
+	$num_rows = mysql_num_rows($result);
+	//echo "<h1>$num_rows results found for \"$keyword\".</h1>";
+	//echo "<ol>";
+	while ($results = mysql_fetch_array($result))
+	{
+		$rest = substr($results['Catno'], -3 );
+		$string = $results['Catno'];
+		?>
+       	                <tr>
+       	                  <td align="left" height="20" ><?php echo $results['symbol']; ?></td>
+       	                  <td><?php echo $results['Catno']; ?></td>
+       	                  <td><?php echo $results['name']; ?></td>
+       	                  <td><input type="text" name="qty4" id="qty5" value="0" maxlength="3" style="width:25px" />
+       	                    </span></td>
+       	                  <td><span>
+       	                    <input type="checkbox" name="check_list[]5" value="<?php echo $results['symbol'];?>" />
+     	                    </span></td>
+   	                    </tr>
+       	                <?php 
+	} ?>
+   	                  </tbody>
+   	                </table>
+   	              </li>
+   	            </ul>
+   	          </div>
+                  <h3>signaling</h3>
+       	      <div>
+       	        <p> Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+       	          purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+       	          velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+       	          suscipit faucibus urna. </p>
+   	          </div>
+              <h3>Gene expression
+</h3>
+       	      <div>
+       	        <p> Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+       	          purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+       	          velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+       	          suscipit faucibus urna. </p>
+   	          </div>
+   	        </div>
+       	    </p>
+   	      </div>
+       	  <div id="view2">
+                <p>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tbody>
+    <tr>
+   		<th width="15%" style="background-color:#CCC"  scope="col">GENE SYMBOL</th>
+        <th width="15%" style="background-color:#CCC"  scope="col">CAT. NO.</th>
+      <th width="35%" style="background-color:#CCC"  scope="col">DESCRIPTION</th>
+      <th width="5%" style="background-color:#CCC"  scope="col">Qty</th>
+         <th width="10%" style="background-color:#CCC"  scope="col"></th>
+    </tr>
+    <?php 
+	$result=mysql_query("SELECT * FROM PrimerSet WHERE Category = 'tight'");
+	$num_rows = mysql_num_rows($result);
+	//echo "<h1>$num_rows results found for \"$keyword\".</h1>";
+	//echo "<ol>";
+	while ($results = mysql_fetch_array($result))
+	{
+		$rest = substr($results['Catno'], -3 );
+		$string = $results['Catno'];
+		?>
+    
+    <tr>
+      <td align="left" height="20" ><?php echo $results['symbol']; ?></td>
+      <td><?php echo $results['Catno']; ?></td>
+      <td><?php echo $results['name']; ?> </td>
+       <td><input type="text" name="qty[]" id="qty" value="0" maxlength="3" style="width:25px" />
+         </span>
+       </td>
+ 	  <td>
+        <span><input type="checkbox" name="check_list[]" value="<?php echo $results['symbol'];?>" ></span>
+      </td>  
+            
+      </tr>  
+       
+<?php 
+	} ?>
+        </table>
+    </p>           
+          </div>
+            
+          <div id="view3">
+            <p>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tbody>
+    <tr>
+   		<th width="15%" style="background-color:#CCC"  scope="col">GENE SYMBOL</th>
+        <th width="15%" style="background-color:#CCC"  scope="col">CAT. NO.</th>
+      <th width="35%" style="background-color:#CCC"  scope="col">DESCRIPTION</th>
+      <th width="5%" style="background-color:#CCC"  scope="col">Qty</th>
+         <th width="10%" style="background-color:#CCC"  scope="col"></th>
+    </tr>
+    <?php 
+	$result=mysql_query("SELECT * FROM PrimerSet WHERE Category = 'scaffolding'");
+	$num_rows = mysql_num_rows($result);
+	//echo "<h1>$num_rows results found for \"$keyword\".</h1>";
+	//echo "<ol>";
+	while ($results = mysql_fetch_array($result))
+	{
+		$rest = substr($results['Catno'], -3 );
+		$string = $results['Catno'];
+		?>
+    
+    <tr>
+      <td align="left" height="20" ><?php echo $results['symbol']; ?></td>
+      <td><?php echo $results['Catno']; ?></td>
+      <td><?php echo $results['name']; ?> </td>
+       <td><input type="text" name="qty[]" id="qty" value="0" maxlength="3" style="width:25px" />
+         </span>
+       </td>
+ 	  <td>
+        <span><input type="checkbox" name="check_list[]" value="<?php echo $results['symbol'];?>" ></span>
+      </td>  
+            
+      </tr>  
+       
+<?php 
+	} ?>
+        </table>
+    </p>
+            </div>
+            
+           
+            
+    </div>
+</div>
+
+<table style="width:100%; height:100%" border="0" cellpadding="15" cellspacing="10">
+  <tr>
+    <td style="padding:10px" colspan="4" align="left">	 
+    <div class="freecontactformheader"><font style="font-size:16px; font-weight:bold">Customer Information:</font></div>
+	  
+	 <div class="freecontactformmessage">Fields marked with <span class="required_star"> * </span> are mandatory.</div>
+     </td>
+    </tr>
+  <tr>
+    <td style="padding:10px" width="102"> <label for="Full_Name" class="required">Full Name<span class="required_star"> * </span></label></td>
+    <td style="padding:10px" width="230"><input width="40"   type="text" name="Full_Name" id="Full_Name" maxlength="80" style="width:230px" required></td>
+  
+    
+  </tr>
+  <tr>
+    <td style="padding:10px"><label for="Email_Address2" class="required">Email Address<span class="required_star"> * </span></label></td>
+    <td style="padding:10px"><input width="40"   type="email" name="Email_Address" id="Email_Address" maxlength="100" style="width:230px" required></td>
+    </tr>
+  <tr>
+    <td style="padding:10px"><label for="Telephone_Number2" class="not-required">Telephone Number</label></td>
+    <td style="padding:10px"><input width="40"   type="text" name="Telephone_Number" id="Telephone_Number" maxlength="100" style="width:230px"></td>
+    </tr>
+    <tr>
+    	<td style="padding:10px"><label for="Institution" class="required">   	  Name of your Institution? <span class="required_star">* </span></label></td>
+   	  <td style="padding:10px"><input width="40"   type="text" name="Institution" id="Institution" maxlength="100" style="width:230px" />
+   	  </td>
+         
+    </tr>
+    <tr>
+    <td style="padding:10px"><label for="Institution" class="required">Format?  <span class="required_star">*</span></label></td>
+   	  <td style="padding:10px"><select name="format" required>
+   	    <option value="NA" selected="selected">---Select your format---</option>
+        <option value="96 well-plate">96 Well-plate</option>
+   	    <option value="Tubes">Tubes</option>
+   	   </select>
+   	  </td>
+      </tr>
+    
+    <tr>
+    	<td style="padding:10px"><label for="model" class="required"> Which Instument are you	using?  <span class="required_star">*</span></label></td>
+   	  <td style="padding:10px"><select name="model" required>
+   	    <option value="" selected="selected">---Select your Model---</option>
+        <option value="ABI / Life Tech : 	ABI 5700">ABI / Life Tech : 	ABI 5700</option>
+   	    <option value="ABI / Life Tech : 	ABI 7000">ABI / Life Tech : 	ABI 7000</option>
+   	    <option value="ABI / Life Tech : 	ABI 7300">ABI / Life Tech : 	ABI 7300</option>
+   	    <option value="ABI / Life Tech : 	ABI 7500">ABI / Life Tech : 	ABI 7500</option>
+   	    <option value="ABI / Life Tech : 	ABI 7500 Fast">ABI / Life Tech : 	ABI 7500 Fast</option>
+   	    <option value="ABI / Life Tech : 	ABI 7700">ABI / Life Tech : 	ABI 7700</option>
+   	    <option value="ABI / Life Tech : 	ABI 7900 HT">ABI / Life Tech : 	ABI 7900 HT</option>
+   	    <option value="ABI / Life Tech : 	ABI 7900 HT Fast">ABI / Life Tech : 	ABI 7900 HT Fast</option>
+   	    <option value="ABI / Life Tech : 	QuantStudio">ABI / Life Tech : 	QuantStudio</option>
+   	    <option value="ABI / Life Tech : 	QuantStudio Fast">ABI / Life Tech : 	QuantStudio Fast</option>
+   	    <option value="ABI / Life Tech : 	StepOnePlus">ABI / Life Tech : 	StepOnePlus</option>
+   	    <option value="ABI / Life Tech : 	ViiA 7">ABI / Life Tech : 	ViiA 7</option>
+   	    <option value="ABI / Life Tech : 	ViiA 7 Fast">ABI / Life Tech : 	ViiA 7 Fast</option>
+   	    <option value="Bio-Rad : 	CFX Connect">Bio-Rad : 	CFX Connect</option>
+   	    <option value="Bio-Rad : 	CFX96">Bio-Rad : 	CFX96</option>
+   	    <option value="Bio-Rad : 	Chromo4">Bio-Rad : 	Chromo4</option>
+   	    <option value="Bio-Rad : 	DNA Engine Opticon 2">Bio-Rad : 	DNA Engine Opticon 2</option>
+   	    <option value="Bio-Rad : 	iCycler">Bio-Rad : 	iCycler</option>
+   	    <option value="Bio-Rad : 	iQ5">Bio-Rad : 	iQ5</option>
+   	    <option value="Bio-Rad : 	MyiQ">Bio-Rad : 	MyiQ</option>
+   	    <option value="Bio-Rad : 	MyiQ2">Bio-Rad : 	MyiQ2</option>
+   	    <option value="Eppendorf / Life Tech :	Matercycler ep realplex 2">Eppendorf / Life Tech :	Matercycler ep realplex 2</option>
+   	    <option value="Eppendorf / Life Tech :	Matercycler ep realplex 4">Eppendorf / Life Tech :	Matercycler ep realplex 4</option>
+   	    <option value="Roche : 	Lightcycler 96">Roche : 	Lightcycler 96</option>
+   	    <option value="Roche : 	Lightcycler 480">Roche : 	Lightcycler 480</option>
+   	    <option value="Stratagene : 	MX3000P">Stratagene : 	MX3000P</option>
+   	    <option value="Stratagene : 	MX3005P">Stratagene : 	MX3005P</option>
+   	    <option value="Stratagene : 	MX4000">Stratagene : 	MX4000</option>
+      </select>
+   	  </td>
+         
+    </tr>
+    
+  <tr>
+    <td style="padding:10px" colspan="4" width="123" valign="top"><p>Description of the product format and quantity<br />
+    e.g.  plate types, quantity for more than 100 reactions, and other specific requirements. <span class="required_star"> *</span></p></tr>
+  <tr>
+   <td style="padding:10px"  colspan="4"><textarea style="width:450px; height:160px" name="Your_Message" id="Your_Message" maxlength="2000" required></textarea></td>
+    </tr>
+  <tr>
+    <td colspan="3" rowspan="-1" align="center">To help prevent automated spam, please answer this question <br />
+      <br />
+      <div class="antispamquestion"> <span class="required_star"> * </span> Using only numbers, what is 10 plus 15? &nbsp;
+        <input width="40"   type="text" name="AntiSpam" id="AntiSpam" maxlength="100" style="width:60px" required>
+    </div>&nbsp;</td>
+  </tr>
+
+
+</table>
+    
+
+        
+ 
+        <input width="40"   type="submit" name="Submit" value=" Request Primers " style="width:200px;height:40px; color:#F00;">
+        </form>
+<?php } ?>
