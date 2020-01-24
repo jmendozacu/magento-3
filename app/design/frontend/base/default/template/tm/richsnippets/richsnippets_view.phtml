@@ -11,6 +11,10 @@
 
     <meta itemprop="productID" content="<?php echo $_product->getSku(); ?>" />
     <meta itemprop="sku" content="<?php echo $_product->getSku(); ?>" />
+    <meta itemprop="mpn" content="<?php echo $_product->getCellType(); ?>" />
+    <div itemprop="brand" itemtype="http://schema.org/Thing" itemscope>
+        <meta itemprop="name" content="Sciencell Research Laboratories" />
+    </div>
 
 <?php $manufacturer = Mage::getStoreConfig('richsnippets/general/manufacturer'); ?>
 <?php if ($manufacturer && Mage::getStoreConfig('richsnippets/display/manufacturer')) : ?>
@@ -25,6 +29,7 @@
     endif;
 ?>
 <div itemprop="offers" itemscope itemtype="<?php echo $itemtype ?>">
+    <link itemprop="url" href="<?php echo $_product->getProductUrl(); ?>" />
     <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrency()->getCode() ?>" />
     <?php if (is_array($price)) : ?>
     <meta itemprop="lowPrice" content="<?php echo $this->getFormattedPrice($price[0]); ?>"/>
@@ -42,8 +47,5 @@
     <?php $seller = str_replace("\"", "'", Mage::getStoreConfig('richsnippets/general/seller')); ?>
     <?php if ($seller && Mage::getStoreConfig('richsnippets/display/seller')) : ?>
         <meta itemprop="seller" content="<?php echo $this->escapeHtml($seller); ?>"/>
-        <div itemprop="brand" itemtype="http://schema.org/Thing" itemscope>
-            <meta itemprop="name" content="Sciencell Research Laboratories" />
-        </div>
     <?php endif; ?>
 </div>
