@@ -24,18 +24,25 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+<?php 
+$position = 1;
+?>
 
 <?php if($crumbs && is_array($crumbs)): ?>
     <div class="breadcrumbs">
-        <ul>
+        <ul itemscope itemtype="http://schema.org/BreadcrumbList">
             <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
-                <li class="<?php echo $_crumbName ?>" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" >
+                
+                <li class="<?php echo $_crumbName ?>" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" >
                 <?php if($_crumbInfo['link']): ?>
-                    <a itemprop="url" href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>">
-                        <span itemprop="title"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></span>
+                    <a itemprop="item" href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>">
+                        <span itemprop="name"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></span>
+                        <meta itemprop="position" content="<?php echo $position++ ?>" />
                     </a>
                 <?php elseif($_crumbInfo['last']): ?>
                     <strong><?php echo $this->htmlEscape($_crumbInfo['label']) ?></strong>
+                    <span itemprop="name"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></span>
+                    <meta itemprop="position" content="<?php echo $position++ ?>" />
                 <?php else: ?>
                     <?php echo $this->htmlEscape($_crumbInfo['label']) ?>
                 <?php endif; ?>
