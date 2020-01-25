@@ -1,0 +1,127 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php
+
+$product = Mage::registry('current_product');
+$keyword = $product->getSku();
+$documentRoot = $_SERVER['DOCUMENT_ROOT'];
+
+echo "<p><b>Product Sheets</b></p>";
+
+if (!file_exists("$documentRoot/PS/{$keyword}.pdf")) {
+    echo "<p>No Product Sheets available yet</p>";
+}
+
+if (file_exists("$documentRoot/PS/{$keyword}.pdf")) 
+{
+    echo "<p><a href=/PS/$keyword.pdf target=_blank ><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets />$keyword</a></p>";
+} 
+if (file_exists("$documentRoot/PS/{$keyword}-b.pdf")) 
+{
+    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-b.pdf target=_blank >$keyword-b (Basal Medium)</a></p>";
+}
+if (file_exists("$documentRoot/PS/{$keyword}-b-prf.pdf")) 
+{
+    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-b-prf.pdf target=_blank >$keyword-b-prf (Basal & Phenol Red Free Medium)</a></p>";
+}
+if (file_exists("$documentRoot/PS/{$keyword}-prf.pdf")) 
+{
+    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-prf.pdf target=_blank >$keyword-prf (Complete Phenol Red Free Medium)</a></p>";
+}
+if (file_exists("$documentRoot/PS/{$keyword}-2.pdf")) 
+{
+    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-2.pdf target=_blank >$keyword-2 (2 Million Cells per Vial)</a></p>";
+}
+if (file_exists("$documentRoot/PS/{$keyword}-5.pdf")) 
+{
+    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-5.pdf target=_blank >$keyword-5 (5 Million Cells per Vial)</a></p>";
+}
+if ($keyword == '5901' ) 
+{
+    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/5901-10.pdf target=_blank >$keyword-10</a></p>";
+}
+else if (file_exists("$documentRoot/PS/{$keyword}-10.pdf")) 
+{
+    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-10.pdf target=_blank >$keyword-10 (10 Million Cells per Vial)</a></p>";
+}
+if (file_exists("$documentRoot/PS/{$keyword}-mt.pdf")) 
+{
+    echo "<a href=/PS/$keyword-mt.pdf target=_blank >$keyword-mt (mitomycin C treated)</a></p>";
+}
+if (file_exists("$documentRoot/PS/{$keyword}-2-mt.pdf")) 
+{
+    echo "<a href=/PS/$keyword-2-mt.pdf target=_blank >$keyword-2-mt (2 Million per Vial - mitomycin C treated)</a></p>";
+}
+if (file_exists("$documentRoot/PS/{$keyword}-5-mt.pdf")) 
+{
+    echo "<a href=/PS/$keyword-5-mt.pdf target=_blank >$keyword-5-mt (5 Million per Vial - mitomycin C treated)</a></p>";
+}
+if (file_exists("$documentRoot/PS/{$keyword}-NG.pdf")) 
+{
+    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-NG.pdf target=_blank >$keyword-NG (Non Glutamine)</a></p>";
+}
+if (file_exists("$documentRoot/PS/{$keyword}-GF.pdf")) 
+{
+    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-GF.pdf target=_blank >$keyword-GF (Glucose Free)</a></p>";
+}
+echo "</br>";
+
+
+
+if (file_exists("$documentRoot/MSDS/{$keyword}.pdf")) 
+{
+    echo "<p><b>Safety Data Sheets</b></p>";
+
+	if(!Mage::getSingleton('customer/session')->isLoggedIn()){
+		echo "Please <a href=\"/customer/account/login/\">login</a> or <a href=\"/customer/account/create/\">register</a> to access the Safety Data Sheet for ";
+        echo $_helper->productAttribute($_product, $_product->getName(), 'name');
+        echo "<br/>";    }
+    else{
+        echo "<p><img src=\"/MSDS/pdf.png\" width=16 height=16 alt=\"Product Sheets\"/> <a href=\"/MSDS/$keyword.pdf\" target=_blank >$keyword </a></p><br/>";
+	}
+} 
+
+
+echo "<br/><br/>";
+echo "<p><strong>Certificates of Analysis</strong></p>";
+echo "<p>For a specific lot number, please search below:</p>";
+
+?>
+<form action="/technical-support/certificate-of-analysis.html" method="get" name="search">
+  <input name="coasearch" type="hidden" value="coasearch">
+<input name="keyword" type="text" placeholder="Lot number" onfocus="this.value=''" size="30" maxlength="30" />
+<input type="image" alt="Go" value="coasearch" src="/OLDSITE/site/images/button_go1.gif" style="vertical-align: middle; margin-left: 5px;" />
+</form>

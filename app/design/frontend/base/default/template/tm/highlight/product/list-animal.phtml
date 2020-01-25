@@ -1,0 +1,43 @@
+<?php
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+    $_id = str_replace(' ', '_', $this->getClassName());
+?>
+<?php if(!$_productCollection->count()): return; endif; ?>
+
+<div class="category-products block-highlight <?php echo $this->getClassName() ?>">
+</br><span><strong>Related  Primary Animal Cell Products</strong></span></br></br>
+    
+    <div class="block-content">
+        <?php $_iterator = 0; ?>
+        <ol class="products-list" id="<?php echo $_id ?>"><tbody>
+<tr>
+<td width="10%">
+<table style="width: 100%;" border="0" cellspacing="0" cellpadding="0">
+<tbody>
+        <?php foreach ($_productCollection as $_product): ?>
+        <?php // Product description ?>
+          <div class="product-shop">
+                <div class="f-fix">
+                  <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+                  <table style="width: 100%;" border="0" cellspacing="0" cellpadding="0">
+
+<tr>
+<td align="left" width="20%" height="25"><a href="<?php echo $this->getProductUrl($_product) ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getSKU() , 'SKU'); ?></a></td>
+<td width="15%"><?php echo $_helper->productAttribute($_product, $_product->getcell_type() , 'cell_type'); ?></td>
+<td width="70%"><a title="HematoGro Medium" href="<?php echo $this->getProductUrl($_product) ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></td></tr>
+
+                </div>
+          </div>
+                
+        <?php endforeach; ?></tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+
+        </ol>
+        <script type="text/javascript">decorateList('<?php echo $_id ?>', 'none-recursive')</script>
+    </div>
+</div>

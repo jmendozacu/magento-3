@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Sciencell_PaymentMethodFilter>
+            <version>0.0.1</version>
+        </Sciencell_PaymentMethodFilter>
+    </modules>
+    <global>
+        <models>
+            <paymentmethodfilter>
+                <class>Sciencell_PaymentMethodFilter_Model</class>
+            </paymentmethodfilter>
+        </models>
+    </global>
+    <frontend>
+        <events>
+           <payment_method_is_active>
+                <observers>
+                   <Sciencell_PaymentMethodFilter_Model_Observer>
+                       <type>singleton</type>
+                       <class>Sciencell_PaymentMethodFilter_Model_Observer</class>
+                       <method>filterPaymentMethod</method>
+                   </Sciencell_PaymentMethodFilter_Model_Observer>
+               </observers>
+          </payment_method_is_active>
+        </events>
+    </frontend>
+</config>

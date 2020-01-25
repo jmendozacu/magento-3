@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+  Moogento
+  
+  SOFTWARE LICENSE
+  
+  This source file is covered by the Moogento End User License Agreement
+  that is bundled with this extension in the file License.html
+  It is also available online here:
+  https://moogento.com/License.html
+  
+  NOTICE
+  
+  If you customize this file please remember that it will be overwritten
+  with any future upgrade installs. 
+  If you'd like to add a feature which is not in this software, get in touch
+  at moogento.com for a quote.
+  
+  ID          pe+sMEDTrtCzNq3pehW9DJ0lnYtgqva4i4Z=
+  File        nomorespam.xml
+  @category   Moogento
+  @package    noMoreSpam
+  @copyright  Copyright (c) 2017 Moogento <info@moogento.com> / All rights reserved.
+  @license    https://moogento.com/License.html
+-->
+<layout version="0.1.0">
+    <default>
+		<reference name="content">
+            <block type="nomorespam/nomorespam" name="nomorespam_newsletter" template="moogento/nomorespam/nomorespam_newsletter.phtml" />
+        </reference>
+    </default>
+
+    <contacts_index_index translate="label">
+        <reference name="content">
+            <block type="nomorespam/nomorespam" name="nomorespam_contact" template="moogento/nomorespam/nomorespam_contact.phtml" />
+        </reference>
+    </contacts_index_index>
+	
+    <catalog_product_view>
+        <reference name="content">
+            <block type="nomorespam/nomorespam" name="nomorespam_review" template="moogento/nomorespam/nomorespam_review.phtml" />
+        </reference>
+    </catalog_product_view>
+	
+	<customer_account_create>
+        <reference name="content">
+            <block type="nomorespam/nomorespam" name="account_create" template="moogento/nomorespam/account_create.phtml" />
+        </reference>
+    </customer_account_create> 
+	<!--<nomorespam_review_email>
+		<block type="nomorespam/nomorespam" name="review_email" template="moogento/nomorespam/email/review.phtml">
+        </block>
+	</nomorespam_review_email>-->
+	<!-- <nomorespam_active_active>
+        <reference name="content">
+            <block type="nomorespam/nomorespam" name="nomorespam_review" template="nomorespam/nomorespam_review.phtml" />
+        </reference>
+    </nomorespam_active_active> -->
+    <review_product_list>
+        <reference name="content">
+            <block type="nomorespam/nomorespam" name="nomorespam_review" template="moogento/nomorespam/nomorespam_review.phtml" />
+        </reference>
+    </review_product_list>
+</layout> 

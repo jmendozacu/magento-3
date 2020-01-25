@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Sciencell_PriceFormatter>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Sciencell_PriceFormatter>
+    </modules>
+</config>

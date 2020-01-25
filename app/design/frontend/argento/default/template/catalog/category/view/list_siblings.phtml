@@ -1,0 +1,28 @@
+<?php
+/**
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+?>
+<?php
+
+    $_currentCategory = Mage::registry('current_category');
+    $_parentCategory = $_currentCategory->getParentCategory();
+    $_siblingCategories = $_parentCategory->getChildrenCategories();
+
+?>
+
+<?php if ($_siblingCategories): ?>
+<ul class="sibling-categories-list">
+<?php
+
+  foreach ($_siblingCategories as $_category) {
+    echo "<li>";
+    echo "<a href=\"/{$_category->getRequestPath()}\">" . $_category->getName() . "</a>";
+    echo "</li>\n";
+  }
+
+?>
+</ul>
+<?php endif; ?>

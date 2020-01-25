@@ -3,7 +3,7 @@
 #--------------------------#
 
 /PATCH_*.sh
-
+.listing
 /app/etc/local.xml
 
 /media/*
