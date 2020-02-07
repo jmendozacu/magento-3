@@ -36,12 +36,12 @@ $position = 1;
                 <li class="<?php echo $_crumbName ?>" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" >
                 <?php if($_crumbInfo['link']): ?>
                     <a itemprop="item" href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>">
-                        <span itemprop="name"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></span>
+                        <span itemprop="name" content="" ><?php echo $this->htmlEscape($_crumbInfo['label']) ?></span>
                         <meta itemprop="position" content="<?php echo $position++ ?>" />
                     </a>
                 <?php elseif($_crumbInfo['last']): ?>
                     <strong><?php echo $this->htmlEscape($_crumbInfo['label']) ?></strong>
-                    <span itemprop="name"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></span>
+                    <span itemprop="name" content="<?php echo $this->htmlEscape($_crumbInfo['label']) ?>"></span>
                     <meta itemprop="position" content="<?php echo $position++ ?>" />
                 <?php else: ?>
                     <?php echo $this->htmlEscape($_crumbInfo['label']) ?>
