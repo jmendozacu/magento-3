@@ -35,6 +35,7 @@
             if(!child.is('img')){
                 if(child.is('a')){
                     child.addClass('nivo-imageLink');
+                    child.attr("aria-label", "link to image")
                     link = child;
                 }
                 child = child.find('img:first');
@@ -76,12 +77,15 @@
         // Set first background
         var sliderImg = $('<img/>').addClass('nivo-main-image');
         sliderImg.attr('src', vars.currentImage.attr('src')).show();
+        sliderImg.attr('alt', 'Main slide');
+        sliderImg.attr('aria-label', 'Main slide');
         slider.append(sliderImg);
 
         // Detect Window Resize
         $(window).resize(function() {
             slider.children('img').width(slider.width());
             sliderImg.attr('src', vars.currentImage.attr('src'));
+            sliderImg.attr('alt', vars.currentImage.attr('title'));
             sliderImg.stop().height('auto');
             $('.nivo-slice').remove();
             $('.nivo-box').remove();
@@ -218,7 +222,7 @@
                 
                 if(i === settings.slices-1){
                     slider.append(
-                        $('<div class="nivo-slice" name="'+i+'"><img src="'+ vars.currentImage.attr('src') +'" style="position:absolute; width:'+ slider.width() +'px; height:auto; display:block !important; top:0; left:-'+ ((sliceWidth + (i * sliceWidth)) - sliceWidth) +'px;" /></div>').css({ 
+                        $('<div class="nivo-slice" name="'+i+'"><img src="'+ vars.currentImage.attr('src') +'" alt="'+ vars.currentImage.attr('title') +'" style="position:absolute; width:'+ slider.width() +'px; height:auto; display:block !important; top:0; left:-'+ ((sliceWidth + (i * sliceWidth)) - sliceWidth) +'px;" /></div>').css({ 
                             left:(sliceWidth*i)+'px', 
                             width:(slider.width()-(sliceWidth*i))+'px',
                             height:sliceHeight+'px', 
@@ -228,7 +232,7 @@
                     );
                 } else {
                     slider.append(
-                        $('<div class="nivo-slice" name="'+i+'"><img src="'+ vars.currentImage.attr('src') +'" style="position:absolute; width:'+ slider.width() +'px; height:auto; display:block !important; top:0; left:-'+ ((sliceWidth + (i * sliceWidth)) - sliceWidth) +'px;" /></div>').css({ 
+                        $('<div class="nivo-slice" name="'+i+'"><img src="'+ vars.currentImage.attr('src') +'" alt="'+ vars.currentImage.attr('title') +'" style="position:absolute; width:'+ slider.width() +'px; height:auto; display:block !important; top:0; left:-'+ ((sliceWidth + (i * sliceWidth)) - sliceWidth) +'px;" /></div>').css({ 
                             left:(sliceWidth*i)+'px', 
                             width:sliceWidth+'px',
                             height:sliceHeight+'px',
