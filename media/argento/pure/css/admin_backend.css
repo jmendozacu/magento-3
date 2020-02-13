@@ -1,0 +1,35 @@
+body{background-color:#ffffff;background-image:url(../images/bg_stripes.gif);background-repeat:repeat-x;background-position:0px 0px;}
+.page{background-color:#ffffff;background-image:none;background-repeat:no-repeat;background-position:0px 0px;}
+#scroll-up a{background-color:#eeeeee;}
+#scroll-up a:hover{background-color:#dddddd;}
+.nav-container .navpro{background-color:#E6E6E6;border-width:0 0 3px 0;border-color:#000000;}
+.nav-container .navpro a.level-top, .nav-container .navpro div.level-top a, .nav-container .navpro .nav-span, .nav-container .navpro .nav-sibling-title, .nav-container .navpro .nav-sibling-title a{font-family:Arial;font-size:12px;text-transform:uppercase;}
+.nav-container .navpro li a.level-top, .nav-container .navpro div.level-top a{background-color:transparent;color:#272e3d;}
+.nav-container .navpro a.level-top:hover, .nav-container .navpro div.level-top a:hover, #nav a.level-top:hover, #nav a.level-top.over, .nav-container .navpro li.parent > a.level-top.over{background-color:#f1f1f1;color:#272e3d;}
+.nav-container .navpro .active > a.level-top, .nav-container .navpro .active > div.level-top a, #nav li.active a.level-top:hover, #nav li.active a.level-top.over, .nav-container .navpro li.active a.level-top:hover, .nav-container .navpro li.active a.level-top.over{background-color:#000000;color:#ffffff;}
+.nav-container .navpro ul .nav-a, .nav-container .navpro ul .nav-span, .nav-container .navpro ul .nav-sibling-title, .nav-container .navpro ul .nav-sibling-title a{font-family:Arial;font-size:12px;text-transform:uppercase;}
+.nav-container .navpro .nav-ul .nav-a, .nav-container .navpro .nav-ul .nav-sibling-title{background-color:transparent;color:#595959;}
+.nav-container .navpro .nav-ul .nav-a:hover, .nav-container .navpro .nav-ul .nav-sibling-title:hover{background-color:#f1f1f1;color:#595959;}
+.nav-container .navpro .nav-ul .active > .nav-a{background-color:transparent;color:#000000;}
+.navpro-mobile a.level-top, .navpro-mobile div.level-top a{font-family:Century Gothic;font-size:18px;text-transform:uppercase;color:#272e3d;}
+.navpro-mobile .active > a.level-top, .navpro-mobile .active > div.level-top a{color:#eb5e00;}
+.navpro-mobile .nav-ul .nav-a, .navpro-mobile .nav-ul .nav-sibling-title a{font-family:Century Gothic;font-size:18px;text-transform:uppercase;background-color:#ffffff;color:#272e3d;}
+.navpro-mobile .nav-ul .active > .nav-a, .navpro-mobile .nav-ul .active > .nav-sibling-title a{background-color:#ffffff;color:#eb5e00;}
+button.button span{padding:4px 10px;font-size:12px;font-weight:bold;background-color:#ff0000;color:#000000;}
+button.button:hover span{background-color:#444444;color:#ffffff;}
+button.btn-alt span{background-color:#aaaaaa;color:#ffffff;}
+button.btn-alt:hover span{background-color:#444444;color:#ffffff;}
+.product-view .product-shop .add-to-cart button.button span{padding:6px 13px;font-size:12px;font-weight:bold;background-color:#ff0000;color:#ffffff;}
+.product-view .product-shop .add-to-cart button.button:hover span{background-color:#444444;color:#ffffff;}
+.easytabs li a, .tab-container .tabs li .block-title{padding:9px 12px;font-family:Century Gothic;font-size:12px;font-weight:normal;text-transform:uppercase;color:#747474;}
+.easytabs li, .tab-container .tabs li{background-color:#ffffff;border-color:#ffffff;}
+.easytabs li:hover, .tab-container .tabs li.over{background-color:#ffffff;border-color:#ffffff;}
+.easytabs li:hover a, .tab-container .tabs li.over .block-title{color:#444444;}
+.easytabs li.active, .tab-container .tabs li.active{background-color:#f4f3f3;}
+.easytabs li.active a, .easytabs li.active a:hover, .tab-container .tabs li.active .block-title{color:#000000;}
+.easytabs li.active, .easytabs-content, .tab-container .content, .tab-container .tabs li.active{border-color:#c6c1c1;}
+h1, .h1, .page-title h1, .page-title h2{font-family:Tahoma,Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:24px;font-weight:normal;color:#000000;}
+.sidebar .block .block-title span strong, .sidebar .block .block-title span span, .sidebar .block .block-title strong, .sidebar .block .block-title span{font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:14px;font-weight:normal;color:#000000;}
+.products-list .product-name a, .products-grid .product-name a{font-family:Tahoma,Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:14px;font-weight:normal;color:#000000;}
+.products-list .product-name a:hover, .products-grid .product-name a:hover{color:#000000;}
+.product-view .box-collateral .h2{font-family:Tahoma,Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:18px;font-weight:normal;color:#000000;}
