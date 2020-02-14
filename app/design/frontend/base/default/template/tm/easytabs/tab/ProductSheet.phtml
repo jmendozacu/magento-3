@@ -47,35 +47,35 @@ if (!file_exists("$documentRoot/PS/{$keyword}.pdf")) {
 
 if (file_exists("$documentRoot/PS/{$keyword}.pdf")) 
 {
-    echo "<p><a href=/PS/$keyword.pdf target=_blank ><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets />$keyword</a></p>";
+    echo "<p><a href=/PS/$keyword.pdf target=_blank ><img src=/PS/pdf.jpg width=16 height=16 alt=Product Sheets />$keyword</a></p>";
 } 
 if (file_exists("$documentRoot/PS/{$keyword}-b.pdf")) 
 {
-    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-b.pdf target=_blank >$keyword-b (Basal Medium)</a></p>";
+    echo "<p><img src=/PS/pdf.jpg width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-b.pdf target=_blank >$keyword-b (Basal Medium)</a></p>";
 }
 if (file_exists("$documentRoot/PS/{$keyword}-b-prf.pdf")) 
 {
-    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-b-prf.pdf target=_blank >$keyword-b-prf (Basal & Phenol Red Free Medium)</a></p>";
+    echo "<p><img src=/PS/pdf.jpg width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-b-prf.pdf target=_blank >$keyword-b-prf (Basal & Phenol Red Free Medium)</a></p>";
 }
 if (file_exists("$documentRoot/PS/{$keyword}-prf.pdf")) 
 {
-    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-prf.pdf target=_blank >$keyword-prf (Complete Phenol Red Free Medium)</a></p>";
+    echo "<p><img src=/PS/pdf.jpg width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-prf.pdf target=_blank >$keyword-prf (Complete Phenol Red Free Medium)</a></p>";
 }
 if (file_exists("$documentRoot/PS/{$keyword}-2.pdf")) 
 {
-    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-2.pdf target=_blank >$keyword-2 (2 Million Cells per Vial)</a></p>";
+    echo "<p><img src=/PS/pdf.jpg width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-2.pdf target=_blank >$keyword-2 (2 Million Cells per Vial)</a></p>";
 }
 if (file_exists("$documentRoot/PS/{$keyword}-5.pdf")) 
 {
-    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-5.pdf target=_blank >$keyword-5 (5 Million Cells per Vial)</a></p>";
+    echo "<p><img src=/PS/pdf.jpg width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-5.pdf target=_blank >$keyword-5 (5 Million Cells per Vial)</a></p>";
 }
 if ($keyword == '5901' ) 
 {
-    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/5901-10.pdf target=_blank >$keyword-10</a></p>";
+    echo "<p><img src=/PS/pdf.jpg width=16 height=16 alt=Product Sheets /> <a href=/PS/5901-10.pdf target=_blank >$keyword-10</a></p>";
 }
 else if (file_exists("$documentRoot/PS/{$keyword}-10.pdf")) 
 {
-    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-10.pdf target=_blank >$keyword-10 (10 Million Cells per Vial)</a></p>";
+    echo "<p><img src=/PS/pdf.jpg width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-10.pdf target=_blank >$keyword-10 (10 Million Cells per Vial)</a></p>";
 }
 if (file_exists("$documentRoot/PS/{$keyword}-mt.pdf")) 
 {
@@ -91,11 +91,11 @@ if (file_exists("$documentRoot/PS/{$keyword}-5-mt.pdf"))
 }
 if (file_exists("$documentRoot/PS/{$keyword}-NG.pdf")) 
 {
-    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-NG.pdf target=_blank >$keyword-NG (Non Glutamine)</a></p>";
+    echo "<p><img src=/PS/pdf.jpg width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-NG.pdf target=_blank >$keyword-NG (Non Glutamine)</a></p>";
 }
 if (file_exists("$documentRoot/PS/{$keyword}-GF.pdf")) 
 {
-    echo "<p><img src=/PS/pdf.png width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-GF.pdf target=_blank >$keyword-GF (Glucose Free)</a></p>";
+    echo "<p><img src=/PS/pdf.jpg width=16 height=16 alt=Product Sheets /> <a href=/PS/$keyword-GF.pdf target=_blank >$keyword-GF (Glucose Free)</a></p>";
 }
 echo "</br>";
 
@@ -110,7 +110,7 @@ if (file_exists("$documentRoot/MSDS/{$keyword}.pdf"))
         echo $_helper->productAttribute($_product, $_product->getName(), 'name');
         echo "<br/>";    }
     else{
-        echo "<p><img src=\"/MSDS/pdf.png\" width=16 height=16 alt=\"Product Sheets\"/> <a href=\"/MSDS/$keyword.pdf\" target=_blank >$keyword </a></p><br/>";
+        echo "<p><img src=\"/MSDS/pdf.jpg\" width=16 height=16 alt=\"Product Sheets\"/> <a href=\"/MSDS/$keyword.pdf\" target=_blank >$keyword </a></p><br/>";
 	}
 } 
 

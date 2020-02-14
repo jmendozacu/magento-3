@@ -56,21 +56,21 @@
 		{
 			if($flag == 0)
 			{
-			?><td><font color="red">MEDIA</font></td>
+			?><td><font color="#b30000">MEDIA</font></td>
             <?php $flag = 1; 
 			}?>
   <?php }else if($rest == 3)
   		{
 			if($flag == 1)
 			{
-			?><td><font color="red">REAGENTS</font></td>
+			?><td><font color="#b30000">REAGENTS</font></td>
             <?php $flag = 2; 
 			}?>
   <?php }else if($rest == 4 || $rest == 5 || $rest == 6 || $rest == 7 || $rest == 9 )
   		{
 			if($flag == 2 || $flag == 1)
 			{
-			?><td colspan="2"><font color="red">MOLECULAR BIOLOGY</font></td>
+			?><td colspan="2"><font color="#b30000">MOLECULAR BIOLOGY</font></td>
              <?php $flag = $flag+4; 
 			}
     }
